@@ -11,6 +11,7 @@
 
 <body>
 
+
 <h1>Place Ships</h1>
 <div id="AircraftcarrierDiv">
     Ship:
@@ -185,7 +186,24 @@
             </tr>
         </table>
     </div>
-    <BR><BR><BR>
+    <BR>
+    <div id="chosenCoordinatesDiv">
+
+        <p id="chosenP1">
+            Click the enemy's board to make your move!
+        </p>
+
+        <p id="chosenP2" hidden>
+            You chose ROW <span id="chosenRowSpan"> </span>, COL <span id="chosenColSpan"> </span> <br/>
+            Choose an action for this coordinate:<br/>
+            <button type="button" id="chosenFire" onclick="chosenFireFunc()">FIRE</button>
+            <button type="button" id="chosenScan" onclick="chosenScanFunc()">SCAN</button>
+
+        </p>
+
+    </div>
+
+    <BR><BR>
     <H1>Theirs</H1>
     <div id="TheirBoard" class="gameBoard">
         <table>
@@ -349,16 +367,17 @@
 </body>
 <script>
 $('#TheirBoard td').click(function(event) {
-   console.log("CLICK EVENT");
-   console.log(this.id);
+   //console.log("CLICK EVENT");
+   //console.log(this.id);
    var idString = this.id;
    var splitArr = idString.split("_");
-   console.log(splitArr);
+   //console.log(splitArr);
    var fireRow = parseInt(splitArr[0]);
    var fireCol = parseInt(splitArr[1]);
-   console.log(fireRow, fireCol);
+   //console.log(fireRow, fireCol);
    var frankenString = "/fire/" + splitArr[0] + "/" + splitArr[1];
-   console.log(frankenString);
+   //console.log(frankenString);
+   flashCoordinateDiv(fireRow, fireCol);
    fireMod(frankenString);
 
 });

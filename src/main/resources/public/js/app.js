@@ -79,6 +79,20 @@ function fireMod(frankenString){
 
 }
 
+function flashCoordinateDiv(row, col){
+    document.getElementById("chosenP2").removeAttribute("hidden");
+    document.getElementById("chosenRowSpan").innerHTML = row;
+    document.getElementById("chosenColSpan").innerHTML = col;
+}
+
+function chosenFireFunc () {
+    console.log("Yarr matey");
+}
+
+function chosenScanFunc () {
+    console.log("Searchin the 7 seas");
+}
+
 function log(logContents){
     console.log(logContents);
 }
