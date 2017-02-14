@@ -348,20 +348,19 @@
 </section>
 </body>
 <script>
-   $('#TheirBoard td').click(function(event) {
+$('#TheirBoard td').click(function(event) {
    console.log("CLICK EVENT");
+   console.log(this.id);
+   var idString = this.id;
+   var splitArr = idString.split("_");
+   console.log(splitArr);
+   var fireRow = parseInt(splitArr[0]);
+   var fireCol = parseInt(splitArr[1]);
+   console.log(fireRow, fireCol);
+   var frankenString = "/fire/" + splitArr[0] + "/" + splitArr[1];
+   console.log(frankenString);
+   fireMod(frankenString);
 
-   $.ajax("/fire", {
-      success: function(data) {
-         <!--$('#main').html($(data).find('#main *'));-->
-         <!--$('#notification-bar').text('The page has been successfully loaded');-->
-         console.log("FIRE SUCCESS");
-      },
-      error: function() {
-         <!--$('#notification-bar').text('An error occurred');-->
-         console.log("FIRE FAIL");
-      }
-   });
 });
 </script>
 </html>

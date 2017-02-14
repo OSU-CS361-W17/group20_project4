@@ -58,6 +58,26 @@ function fire(){
    });
 
 }
+function fireMod(frankenString){
+   var request = $.ajax({
+     url: frankenString,
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
+
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+}
 
 function log(logContents){
     console.log(logContents);
