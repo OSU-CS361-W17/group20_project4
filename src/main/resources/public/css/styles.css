@@ -24,6 +24,36 @@ table, th, td {
 background-color: orange;
 }
 
+/* Stuff for making the coordinates div flash once */
+#chosenCoordinatesDiv {
+    border: 1px solid black;
+    background-color: white;
+}
+
+@-webkit-keyframes coordDivAnimation {
+    0% {
+        background-color: Yellow;
+        opacity:1;
+    }
+    22% {
+        background-color: Yellow;
+    }
+    77% {
+        background-color: Yellow;
+    }
+    100% {
+        background-color: #FFFFFF;
+    }
+}
+
+.flash{
+  -webkit-animation-name: coordDivAnimation;
+    -webkit-animation-duration: 500ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+}
+/* End stuff for making the coordinates div flash once */
+
 /*
 button {
     margin: 0;

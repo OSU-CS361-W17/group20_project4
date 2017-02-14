@@ -1,4 +1,6 @@
 var gameModel;
+var currentChosenRow = 0;
+var currentChosenCol = 0;
 
 $( document ).ready(function() {
   // Handler for .ready() called.
@@ -82,7 +84,11 @@ function fireMod(frankenString){
 function flashCoordinateDiv(row, col){
     document.getElementById("chosenP2").removeAttribute("hidden");
     document.getElementById("chosenRowSpan").innerHTML = row;
+    currentChosenRow = row;
     document.getElementById("chosenColSpan").innerHTML = col;
+    currentChosenCol = col;
+    console.log(currentChosenRow, currentChosenCol);
+    document.getElementById("chosenCoordinatesDiv").className = "flash";
 }
 
 function chosenFireFunc () {
