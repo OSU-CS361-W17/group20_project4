@@ -196,8 +196,8 @@
         <p id="chosenP2" hidden>
             <span id="chosenSentence"><b>You chose [<span id="chosenRowSpan"> </span>, <span id="chosenColSpan"> </span>]!</b></span><br/><br/>
             Choose an action for this coordinate:<br/>
-            <button type="button" id="chosenFire" onclick="chosenFireFunc()">FIRE</button>
-            <button type="button" id="chosenScan" onclick="chosenScanFunc()">SCAN</button>
+            <button type="button" id="chosenFire" onclick="chosenFireFunc('/fire/0/0')">FIRE</button>
+            <button type="button" id="chosenScan" onclick="chosenScanFunc('/scan/0/0')">SCAN</button>
         </p>
 
     </div>
@@ -407,8 +407,7 @@ $('#TheirBoard td').click(function(event) {
    //console.log(fireRow, fireCol);
    var frankenString = "/fire/" + splitArr[0] + "/" + splitArr[1];
    //console.log(frankenString);
-   flashCoordinateDiv(fireRow, fireCol);
-   fireMod(frankenString);
+   updateCoordinateStuff(fireRow, fireCol);
 
 });
 </script>

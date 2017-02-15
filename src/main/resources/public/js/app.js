@@ -86,8 +86,27 @@ function scan(){
    });
 
 }
-function fireMod(frankenString){
-   var request = $.ajax({
+function updateCoordinateStuff(row, col){
+
+    //Update the view with the most recent coordinates
+    document.getElementById("chosenP2").removeAttribute("hidden");
+    document.getElementById("chosenRowSpan").innerHTML = row;
+    currentChosenRow = row;
+    document.getElementById("chosenColSpan").innerHTML = col;
+    currentChosenCol = col;
+    //console.log(currentChosenRow, currentChosenCol);
+
+    //Create correct strings for URLs
+    var fireString = "chosenFireFunc('/fire/" + row + "/" + col + "')";
+    var scanString = "chosenScanFunc('/scan/" + row + "/" + col + "')";
+    //console.log(fireString, scanString);
+
+    //Update onclicks
+    document.getElementById('chosenFire').setAttribute('onclick', fireString);
+    document.getElementById('chosenScan').setAttribute('onclick', scanString);
+
+
+   /* var request = $.ajax({
      url: frankenString,
      method: "post",
      data: JSON.stringify(gameModel),
@@ -103,25 +122,15 @@ function fireMod(frankenString){
 
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
-   });
+   }); */
 
 }
 
-function flashCoordinateDiv(row, col){
-    document.getElementById("chosenP2").removeAttribute("hidden");
-    document.getElementById("chosenRowSpan").innerHTML = row;
-    currentChosenRow = row;
-    document.getElementById("chosenColSpan").innerHTML = col;
-    currentChosenCol = col;
-    console.log(currentChosenRow, currentChosenCol);
-    document.getElementById("chosenCoordinatesDiv").className = "flash";
-}
-
-function chosenFireFunc () {
+function chosenFireFunc (reqURL) {
     console.log("Yarr matey");
 }
 
-function chosenScanFunc () {
+function chosenScanFunc (reqURL) {
     console.log("Searchin the 7 seas");
     if(gameModel.scanResult){
         alert("Scan found at least one Ship")
