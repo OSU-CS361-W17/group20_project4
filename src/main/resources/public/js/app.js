@@ -1,6 +1,7 @@
 var gameModel;
 var currentChosenRow = 0;
 var currentChosenCol = 0;
+var scanFlag = 0;
 
 $( document ).ready(function() {
   // Handler for .ready() called.
@@ -146,6 +147,7 @@ function chosenScanFunc (reqURL) {
 
     //If it went through, display the game state
     request.done(function( currModel ) {
+        scanFlag = 1;
         displayGameState(currModel);
         gameModel = currModel;
     });
@@ -154,14 +156,6 @@ function chosenScanFunc (reqURL) {
     request.fail(function( jqXHR, textStatus ) {
         alert( "Request failed: " + textStatus );
     });
-
-    //Check to see if the scan found anything and display
-    if(gameModel.scanResult){
-        alert("Scan found at least one Ship")
-    }
-    else{
-        alert("Scan found no Ships")
-    }
 }
 
 
@@ -193,6 +187,16 @@ for (var i = 0; i < gameModel.playerHits.length; i++) {
    $( '#MyBoard #' + gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down ).css("background-color", "red");
 }
 
+    if (scanFlag) {
+        //Check to see if the scan found anything and display
+        if(gameModel.scanResult){
+            alert("Scan found at least one Ship");
+        }
+        else{
+            alert("Scan found no Ships");
+        }
+        scanFlag = 0;
+    }
 
 
 }
@@ -200,23 +204,23 @@ for (var i = 0; i < gameModel.playerHits.length; i++) {
 
 
 function displayShip(ship){
- startCoordAcross = ship.start.Across;
- startCoordDown = ship.start.Down;
- endCoordAcross = ship.end.Across;
- endCoordDown = ship.end.Down;
-// console.log(startCoordAcross);
- if(startCoordAcross > 0){
-    if(startCoordAcross == endCoordAcross){
-        for (i = startCoordDown; i <= endCoordDown; i++) {
-            $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-color", "yellow");
-        }
-    } else {
-        for (i = startCoordAcross; i <= endCoordAcross; i++) {
-            $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-color", "yellow");
+
+    startCoordAcross = ship.start.Across;
+    startCoordDown = ship.start.Down;
+    endCoordAcross = ship.end.Across;
+    endCoordDown = ship.end.Down;
+    // console.log(startCoordAcross);
+    if(startCoordAcross > 0){
+        if(startCoordAcross == endCoordAcross){
+            for (i = startCoordDown; i <= endCoordDown; i++) {
+                $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-color", "yellow");
+            }
+        } else {
+            for (i = startCoordAcross; i <= endCoordAcross; i++) {
+                $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-color", "yellow");
+            }
         }
     }
- }
-
 
 
 }
