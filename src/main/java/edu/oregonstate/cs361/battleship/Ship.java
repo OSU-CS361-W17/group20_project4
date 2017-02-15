@@ -52,6 +52,13 @@ public class Ship {
         return name;
     }
 
+    public boolean alreadyPlaced() {
+        if (this.start.getAcross() == 0) {
+            return false;
+        }
+        return true;
+    }
+
 
     public boolean scan(Coordinate coor) {
         if(covers(coor)){
@@ -70,5 +77,45 @@ public class Ship {
             return true;
         }
         return false;
+    }
+
+    public boolean overlaps(Ship ship) {
+        Ship shortShip;
+        Ship longShip;
+        boolean overlap = false;
+        Coordinate test = new Coordinate(0, 0);
+        Coordinate test2 = new Coordinate(0, 0);
+
+        if (this.length <= ship.length) {
+            shortShip = this;
+            longShip = ship;
+        }
+        else {
+            shortShip = ship;
+            longShip = this;
+        }
+
+        // for each square in shorter ship, does longer ship share the same square?
+        for (int i = 0; i <= shortShip.length; i++) {
+            // if longShip horizontal, want to loop through length horizontally
+            if(longShip.start.getAcross() == longShip.end.getAcross()) {
+                test.setAcross(shortShip.start.getAcross() + i);
+                test2.setAcross(shortShip.start.getAcross() - i);
+                test.setDown(shortShip.start.getDown());
+                test2.setDown(shortShip.start.getDown());
+            }
+            // if longShip vertical, want to loop through length vertically
+            else if(longShip.start.getDown() == longShip.end.getDown()) {
+                test.setDown(shortShip.start.getDown() + i);
+                test2.setDown(shortShip.start.getDown() - i);
+                test.setAcross(shortShip.start.getAcross());
+                test2.setAcross(shortShip.start.getAcross());
+            }
+            overlap = longShip.covers(test) || longShip.covers(test2);
+            if (overlap) {
+                break;
+            }
+        }
+        return overlap;
     }
 }

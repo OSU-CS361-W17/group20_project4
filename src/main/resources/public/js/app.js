@@ -116,6 +116,10 @@ function displayGameState(gameModel){
     $( '#MyBoard td'  ).css("background-color", "blue");
     $( '#TheirBoard td'  ).css("background-color", "blue");
 
+    if (gameModel.overlapResult) {
+        alert("Your ships can't overlap, try again.");
+    }
+
     displayShip(gameModel.aircraftCarrier);
     displayShip(gameModel.battleship);
     displayShip(gameModel.cruiser);
@@ -170,6 +174,4 @@ function displayShip(ship){
             }
         }
     }
-
-
 }

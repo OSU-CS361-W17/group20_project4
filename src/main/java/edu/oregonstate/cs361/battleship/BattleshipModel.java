@@ -27,6 +27,7 @@ public class BattleshipModel {
     private ArrayList<Coordinate> computerMisses;
 
     boolean scanResult = false;
+    boolean overlapResult = false;
 
 
 
@@ -57,6 +58,10 @@ public class BattleshipModel {
     public BattleshipModel placeShip(String shipName, String row, String col, String orientation) {
         int rowint = Integer.parseInt(row);
         int colInt = Integer.parseInt(col);
+
+        // before attempting to place ship, reset overlap flag
+        overlapResult = false;
+
         if(orientation.equals("horizontal")){
             if (shipName.equalsIgnoreCase("aircraftcarrier")) {
                 this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+5));
@@ -82,6 +87,43 @@ public class BattleshipModel {
                 }if(shipName.equalsIgnoreCase("submarine")) {
                     this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 2, colInt));
                 }
+        }
+                // stick current model's user ships-- if they have already been placed-- in an array
+        // loop through the array-- for each ship and the next ship, if they overlap, return this; else, continue
+        ArrayList<Ship> placedShips;
+        placedShips = new ArrayList<>();
+        if (this.aircraftCarrier.alreadyPlaced()) {
+            placedShips.add(this.aircraftCarrier);
+        }
+        if (this.battleship.alreadyPlaced()) {
+            placedShips.add(this.battleship);
+        }
+        if (this.cruiser.alreadyPlaced()) {
+            placedShips.add(this.cruiser);
+        }
+        if (this.destroyer.alreadyPlaced()) {
+            placedShips.add(this.destroyer);
+        }
+        if (this.submarine.alreadyPlaced()) {
+            placedShips.add(this.submarine);
+        }
+        System.out.println("there are currently " + placedShips.size() + " ships placed already");
+
+        System.out.println("The following ships have already been placed:");
+        for (int i = 0; i < placedShips.size(); i++) {
+            System.out.println(placedShips.get(i).getName());
+        }
+
+        // for each already placed ship
+        for (int i = 0; i < placedShips.size(); i++) {
+            for (int j = i+1; j < placedShips.size(); j++) {
+                System.out.println("Currently comparing " + placedShips.get(i).getName() + " and " + placedShips.get(j).getName());
+                if (placedShips.get(i).overlaps(placedShips.get(j))) {
+                    overlapResult = true;
+                    this.getShip(shipName).setLocation(new Coordinate(0,0),new Coordinate(0,0));
+                    return this;
+                }
+            }
         }
         return this;
     }
