@@ -123,6 +123,12 @@ function chosenFireFunc () {
 
 function chosenScanFunc () {
     console.log("Searchin the 7 seas");
+    if(gameModel.scanResult){
+        alert("Scan found at least one Ship")
+    }
+    else{
+        alert("Scan found no Ships")
+    }
 }
 
 
@@ -133,11 +139,6 @@ function log(logContents){
 function displayGameState(gameModel){
 $( '#MyBoard td'  ).css("background-color", "blue");
 $( '#TheirBoard td'  ).css("background-color", "blue");
-
-if(gameModel.scanResult){
-alert("Scan found at least one Ship")}
-else{
-alert("Scan found no Ships")}
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);

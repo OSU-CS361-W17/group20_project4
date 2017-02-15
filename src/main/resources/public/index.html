@@ -194,8 +194,10 @@
         </p>
 
         <p id="chosenP2" hidden>
-            <b>You fired at [<span id="chosenRowSpan"> </span>, <span id="chosenColSpan"> </span>]!</b>
-
+            <b>You chose [<span id="chosenRowSpan"> </span>, <span id="chosenColSpan"> </span>]!</b><br/><br/>
+            Choose an action for this coordinate:<br/>
+            <button type="button" id="chosenFire" onclick="chosenFireFunc()">FIRE</button>
+            <button type="button" id="chosenScan" onclick="chosenScanFunc()">SCAN</button>
         </p>
 
     </div>
