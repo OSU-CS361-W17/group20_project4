@@ -11,6 +11,7 @@
 
 <body>
 
+
 <h1>Place Ships</h1>
 <div id="AircraftcarrierDiv">
     Ship:
@@ -185,7 +186,21 @@
             </tr>
         </table>
     </div>
-    <BR><BR><BR>
+
+    <br/>
+    <br/>
+    <div id="chosenCoordinatesDiv">
+        <p id="chosenP1">
+            Click the enemy's board to make your move!
+        </p>
+        <p id="chosenP2" hidden>
+            <span id="chosenSentence"><b>You chose [<span id="chosenRowSpan"> </span>, <span id="chosenColSpan"> </span>]!</b></span><br/><br/>
+            Choose an action for this coordinate:<br/>
+            <button type="button" id="chosenFire" onclick="chosenFireFunc('/fire/0/0')">FIRE</button>
+            <button type="button" id="chosenScan" onclick="chosenScanFunc('/scan/0/0')">SCAN</button>
+        </p>
+    </div>
+
     <H1>Theirs</H1>
     <div id="TheirBoard" class="gameBoard">
         <table>
@@ -312,87 +327,17 @@
         </table>
     </div>
 
-    <h1>Fire:</h1>
-    <div id="FireDiv">
-        Row:
-        <select name="rowFire" id="rowFire">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        Column:
-        <select name="colFire" id="colFire">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <button type="button" onclick="fire()">Fire</button>
-    </div>
-
-    <h1>Scan:</h1>
-    <div id="ScanDiv">
-        Row:
-        <select name="rowFire" id="rowScan">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        Column:
-        <select name="colFire" id="colScan">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <button type="button" onclick="scan()">Scan</button>
-    </div>
-
 
 
 </section>
 </body>
 <script>
-   $('#TheirBoard td').click(function(event) {
-   console.log("CLICK EVENT");
-
-   $.ajax("/fire", {
-      success: function(data) {
-         <!--$('#main').html($(data).find('#main *'));-->
-         <!--$('#notification-bar').text('The page has been successfully loaded');-->
-         console.log("FIRE SUCCESS");
-      },
-      error: function() {
-         <!--$('#notification-bar').text('An error occurred');-->
-         console.log("FIRE FAIL");
-      }
-   });
+$('#TheirBoard td').click(function(event) {
+    var idString = this.id;
+    var splitArr = idString.split("_");
+    var fireRow = parseInt(splitArr[0]);
+    var fireCol = parseInt(splitArr[1]);
+    updateCoordinateStuff(fireRow, fireCol);
 });
 </script>
 </html>

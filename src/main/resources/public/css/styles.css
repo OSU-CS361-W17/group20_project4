@@ -24,6 +24,18 @@ table, th, td {
 background-color: orange;
 }
 
+/* Stuff for the scan/fire coordinates div */
+#chosenCoordinatesDiv {
+    border: 1px solid black;    /* @Rebecca: probably want to take off this border, this is just so you know where the div is */
+    background-color: white;
+}
+
+#chosenSentence {
+    background-color: yellow;
+}
+
+/* End stuff for the scan/fire coordinates div */
+
 /*
 button {
     margin: 0;
