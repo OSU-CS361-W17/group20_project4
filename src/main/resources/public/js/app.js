@@ -39,7 +39,7 @@ function placeShip() {
 
 
 
-function fire(){
+/*function fire(){
  console.log($( "#colFire" ).val());
    console.log($( "#rowFire" ).val());
 //var menuId = $( "ul.nav" ).first().attr( "id" );
@@ -61,9 +61,9 @@ function fire(){
      alert( "Request failed: " + textStatus );
    });
 
-}
+}*/
 
-function scan(){
+/*function scan(){
  console.log($( "#colScan" ).val());
    console.log($( "#rowScan" ).val());
 //var menuId = $( "ul.nav" ).first().attr( "id" );
@@ -85,7 +85,7 @@ function scan(){
      alert( "Request failed: " + textStatus );
    });
 
-}
+}*/
 function updateCoordinateStuff(row, col){
 
     //Update the view with the most recent coordinates
@@ -105,33 +105,57 @@ function updateCoordinateStuff(row, col){
     document.getElementById('chosenFire').setAttribute('onclick', fireString);
     document.getElementById('chosenScan').setAttribute('onclick', scanString);
 
-
-   /* var request = $.ajax({
-     url: frankenString,
-     method: "post",
-     data: JSON.stringify(gameModel),
-     contentType: "application/json; charset=utf-8",
-     dataType: "json"
-   });
-
-   request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
-
-   });
-
-   request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
-   }); */
-
 }
 
 function chosenFireFunc (reqURL) {
-    console.log("Yarr matey");
+    //console.log("Yarr matey");
+
+    //Send the request
+    var request = $.ajax({
+        url: reqURL,
+        method: "post",
+        data: JSON.stringify(gameModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    //If it's good, display the game state
+    request.done(function( currModel ) {
+        displayGameState(currModel);
+        gameModel = currModel;
+    });
+
+    //If it's not, error
+    request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+
 }
 
 function chosenScanFunc (reqURL) {
-    console.log("Searchin the 7 seas");
+    //console.log("Searchin the 7 seas");
+
+    //Send the request
+    var request = $.ajax({
+        url: reqURL,
+        method: "post",
+        data: JSON.stringify(gameModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    //If it went through, display the game state
+    request.done(function( currModel ) {
+        displayGameState(currModel);
+        gameModel = currModel;
+    });
+
+    //If it didn't, error
+    request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+
+    //Check to see if the scan found anything and display
     if(gameModel.scanResult){
         alert("Scan found at least one Ship")
     }
