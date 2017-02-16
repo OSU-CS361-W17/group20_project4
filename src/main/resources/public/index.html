@@ -11,10 +11,36 @@
 
 <body>
 
+<!--Player and computer text are swapped. -->
+<!--"computerHits" corresponds to number of times the computer has been hit-->
+<div class = "information">
+	<p class = "title">Instructions</p>
+	<p>
+	Battleship begins with both players choosing their ship positions, which you can access from the place ship box.
+	Your ships will appear on the board as ship icons, while your opponent's ships are hidden from you.
+	Once you place all your ships you are ready to fire at your opponent by guessing their ship locations.
+	The objective of battleship is to sink all of your opponent's ships by hitting each grid square that a ship exists on.
+	Click a square on their grid to select it, and click the button that says fire to confirm the action.
+	Following your action the grid square chosen will change to indicate whether you have hit (X) or missed (O).
+	Immediately following your action the AI opponent will take their action--with the grid square chosen being marked on your grid.
+	Additionally you can select a square to scan for ships, and click the scan button to proceed instead of using fire.
+	This feature works by sending you a popup alerting you if there a ship within the scaned area.
+	The scaned area is defined as the squares surrounding (up, down, left, right) and including the grid square selected.
+	Continue firing at your opponent until either one of you has won the game by reaching as many hits as there are ship squares on a grid.
+	The reset button can be used to start the game over.
+	</p>
+	
+	
+	<p class = "title">Hits and Misses</p>
+    <label> Player hits: <div id="computerHits">0</div></label>
+    <label> Player misses: <div id="computerMisses">0</div></label>
+    <label> Computer hits: <div id="playerHits">0</div></label>
+    <label> Computer misses: <div id="playerMisses">0</div></label>
+</div>
 
-<h1>Place Ships</h1>
-<div id="AircraftcarrierDiv">
-    Ship:
+<div id ="Options" class="GameOptions">
+	<p class = "title">Place a Ship</p>
+	<div class = "placeShip">
     <select name="shipSelec" id="shipSelec">
         <option value="aircraftCarrier">Aircraft Carrier</option>
         <option value="battleship">Battleship</option>
@@ -48,22 +74,42 @@
         <option value="9">9</option>
         <option value="10">10</option>
     </select>
-    Orientation:
     <select name="orientationSelec" id="orientationSelec">
         <option value="horizontal">horizontal</option>
         <option value="vertical">vertical</option>
     </select>
     <button type="button" onclick="placeShip()">Place</button>
+	</div>
+	
+	<p class = "title">Fire or Scan</p>
+    <div id="chosenCoordinatesDiv">
+        <p id="chosenP1">
+            Click the enemy's board to make your move!
+        </p>
+        <p id="chosenP2" hidden>
+            <span id="chosenSentence"><b>You chose [<span id="chosenRowSpan"> </span>, <span id="chosenColSpan"> </span>]!</b></span><br/><br/>
+            Choose an action for this coordinate:<br/>
+            <button type="button" id="chosenFire" onclick="chosenFireFunc('/fire/0/0')">FIRE</button>
+            <button type="button" id="chosenScan" onclick="chosenScanFunc('/scan/0/0')">SCAN</button>
+        </p>
+    </div>
+	
+	<p class = "title">Reset the Game</p>
+	
+	<FORM style = "width: 100%; text-align: center;">
+	<INPUT TYPE="button" onClick="history.go(0)" VALUE="RESET">
+	</FORM>
+	
 </div>
 
 
 
-
+<div class ="ShipBoards">
 <section id="todoapp" ic-target="this">
     <!--#parse("/velocity/todoList.vm")-->
-    <h1>Yours</h1>
     <div id="MyBoard" class="gameBoard">
-        <table>
+		<p class = "title">YOUR SHIPS</p>
+        <table style ="width: 100%; height:50%;">
             <tr id="My_Row_1">
                 <td id="1_1"  class="{{1_1}}"></td>
                 <td id="1_2"  class="{{1_2}}"></td>
@@ -187,23 +233,9 @@
         </table>
     </div>
 
-    <br/>
-    <br/>
-    <div id="chosenCoordinatesDiv">
-        <p id="chosenP1">
-            Click the enemy's board to make your move!
-        </p>
-        <p id="chosenP2" hidden>
-            <span id="chosenSentence"><b>You chose [<span id="chosenRowSpan"> </span>, <span id="chosenColSpan"> </span>]!</b></span><br/><br/>
-            Choose an action for this coordinate:<br/>
-            <button type="button" id="chosenFire" onclick="chosenFireFunc('/fire/0/0')">FIRE</button>
-            <button type="button" id="chosenScan" onclick="chosenScanFunc('/scan/0/0')">SCAN</button>
-        </p>
-    </div>
-
-    <H1>Theirs</H1>
     <div id="TheirBoard" class="gameBoard">
-        <table>
+		<p class = "title">OPPONENT'S SHIPS</p>
+        <table style ="width: 100%; height:50%;">
             <tr id="My_Row_1">
                 <td id="1_1"  class="{{1_1}}"></td>
                 <td id="1_2"  class="{{1_2}}"></td>
@@ -326,10 +358,9 @@
             </tr>
         </table>
     </div>
-
-
-
 </section>
+</div>
+
 </body>
 <script>
 $('#TheirBoard td').click(function(event) {
