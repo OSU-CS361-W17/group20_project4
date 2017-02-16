@@ -113,7 +113,7 @@ function log(logContents){
 }
 
 function displayGameState(gameModel){
-    $( '#MyBoard td'  ).css("background-color", "blue");
+    $( '#MyBoard td'  ).css("background-color","blue");
     $( '#TheirBoard td'  ).css("background-color", "blue");
 
     displayShip(gameModel.aircraftCarrier);
@@ -123,16 +123,28 @@ function displayGameState(gameModel){
     displayShip(gameModel.submarine);
 
     for (var i = 0; i < gameModel.computerMisses.length; i++) {
-       $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-color", "green");
+       $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-image", "url('http://i.imgur.com/R2hmmag.gif')");
+       $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-size", "contain");
+       $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-repeat", "no-repeat");
+
     }
     for (var i = 0; i < gameModel.computerHits.length; i++) {
-       $( '#TheirBoard #' + gameModel.computerHits[i].Across + '_' + gameModel.computerHits[i].Down ).css("background-color", "red");
+       $( '#TheirBoard #' + gameModel.computerHits[i].Across + '_' + gameModel.computerHits[i].Down ).css("background-image", "url('http://i.imgur.com/yXH9huv.png')");
+       $( '#TheirBoard #' + gameModel.computerHits[i].Across + '_' + gameModel.computerHits[i].Down ).css("background-size", "contain");
+       $( '#TheirBoard #' + gameModel.computerHits[i].Across + '_' + gameModel.computerHits[i].Down ).css("background-repeat", "no-repeat");
+
     }
     for (var i = 0; i < gameModel.playerMisses.length; i++) {
-       $( '#MyBoard #' + gameModel.playerMisses[i].Across + '_' + gameModel.playerMisses[i].Down ).css("background-color", "green");
+       $( '#MyBoard #' + gameModel.playerMisses[i].Across + '_' + gameModel.playerMisses[i].Down ).css("background-image", "url('http://i.imgur.com/R2hmmag.gif')");
+       $( '#MyBoard #' + gameModel.playerMisses[i].Across + '_' + gameModel.playerMisses[i].Down ).css("background-size", "contain");
+       $( '#MyBoard #' + gameModel.playerMisses[i].Across + '_' + gameModel.playerMisses[i].Down ).css("background-repeat", "no-repeat");
+
     }
     for (var i = 0; i < gameModel.playerHits.length; i++) {
-       $( '#MyBoard #' + gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down ).css("background-color", "red");
+       $( '#MyBoard #' + gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down ).css("background-image", "url('http://i.imgur.com/yXH9huv.png')");
+       $( '#MyBoard #' + gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down ).css("background-size", "contain");
+       $( '#MyBoard #' + gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down ).css("background-repeat", "no-repeat");
+
     }
 
     // Added this flag check to make the scan alert only fire on scanning
@@ -162,11 +174,17 @@ function displayShip(ship){
     if(startCoordAcross > 0){
         if(startCoordAcross == endCoordAcross){
             for (i = startCoordDown; i <= endCoordDown; i++) {
-                $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-color", "yellow");
+                $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-image", "url('http://clipartix.com/wp-content/uploads/2016/04/Blue-boat-clip-art-vector-clip-art-free-clipartcow.png')");
+                $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-size", "contain");
+                $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-repeat", "no-repeat");
+
             }
         } else {
             for (i = startCoordAcross; i <= endCoordAcross; i++) {
-                $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-color", "yellow");
+                $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-image", "url('http://clipartix.com/wp-content/uploads/2016/04/Blue-boat-clip-art-vector-clip-art-free-clipartcow.png')");
+                $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-size", "contain");
+                $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-repeat", "no-repeat");
+
             }
         }
     }
