@@ -122,6 +122,8 @@ function displayGameState(gameModel){
     displayShip(gameModel.destroyer);
     displayShip(gameModel.submarine);
 
+    displayHits(gameModel);
+
     for (var i = 0; i < gameModel.computerMisses.length; i++) {
        $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-image", "url('http://i.imgur.com/R2hmmag.gif')");
        $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-size", "contain");
@@ -188,6 +190,16 @@ function displayShip(ship){
             }
         }
     }
+}
 
+function displayHits(gameObject){
+ var computerHits = gameObject.computerHits.length;
+ var playerHits= gameObject.playerHits.length;
+ var computerMisses = gameObject.computerMisses.length;
+ var playerMisses = gameObject.playerMisses.length;
 
+ $("#computerHits").text(computerHits);
+ $("#computerMisses").text(computerMisses);
+ $("#playerHits").text(playerHits);
+ $("#playerMisses").text(playerMisses);
 }
