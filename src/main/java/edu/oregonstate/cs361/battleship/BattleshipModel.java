@@ -26,8 +26,11 @@ public class BattleshipModel {
     ArrayList<Coordinate> computerHits;
     private ArrayList<Coordinate> computerMisses;
 
-    boolean scanResult = false;
+    ArrayList<Coordinate> shipSquares;      // to hold all the squares of all ships already placed by the user
 
+    boolean scanResult = false;
+    boolean overlapResult = false;
+    boolean offBoard = false;
 
 
     public BattleshipModel() {
@@ -35,6 +38,8 @@ public class BattleshipModel {
         playerMisses= new ArrayList<>();
         computerHits = new ArrayList<>();
         computerMisses= new ArrayList<>();
+
+        shipSquares = new ArrayList<>();
     }
 
 
@@ -57,6 +62,22 @@ public class BattleshipModel {
     public BattleshipModel placeShip(String shipName, String row, String col, String orientation) {
         int rowint = Integer.parseInt(row);
         int colInt = Integer.parseInt(col);
+
+        /* before attempting to place ship, reset overlap flag... Also, if prospective ship placing is actually a
+        replacing, i.e. it's coming in with initialized head-butts that aren't zeroed out, remove all its squares from
+        the squares-occupied-by-current-ships masterlist...
+         */
+        overlapResult = false;
+        offBoard = false;
+        System.out.println("start of placeShips. shipSquares contains: ");
+        for (int i = 0; i < shipSquares.size(); i++) {
+            System.out.println(shipSquares.get(i).getAcross() + ", " + shipSquares.get(i).getDown());
+        }
+        if (this.getShip(shipName).alreadyPlaced()) {
+            System.out.println("hey you've placed this before...");
+            shipSquares.removeAll(this.getShip(shipName).getShipSquares());
+        }
+
         if(orientation.equals("horizontal")){
             if (shipName.equalsIgnoreCase("aircraftcarrier")) {
                 this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+5));
@@ -82,6 +103,29 @@ public class BattleshipModel {
                 }if(shipName.equalsIgnoreCase("submarine")) {
                     this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 2, colInt));
                 }
+        }
+
+        // for each square that the freshly placed ship now occupies...
+        for (int i = 0; i < this.getShip(shipName).getShipSquares().size(); i++) {
+            if (this.getShip(shipName).getShipSquares().get(i).getAcross() > 10 || this.getShip(shipName).getShipSquares().get(i).getDown() > 10) {
+                offBoard = true;
+                // "un-place" ship
+                this.getShip(shipName).setLocation(new Coordinate(0,0), new Coordinate(0, 0));
+                return this;
+            }
+            // if master list already contains one of the new ship's squares, it's an overlap!
+            if (shipSquares.contains(this.getShip(shipName).getShipSquares().get(i))) {
+                overlapResult = true;
+                // "un-place" ship
+                this.getShip(shipName).setLocation(new Coordinate(0,0), new Coordinate(0, 0));
+                return this;
+            }
+        }
+        // if no overlap + not off the board, leave the ship alone and add its squares to the master list
+        shipSquares.addAll(this.getShip(shipName).getShipSquares());
+        System.out.println("end of placeShips. shipSquares contains: ");
+        for (int i = 0; i < shipSquares.size(); i++) {
+            System.out.println(shipSquares.get(i).getAcross() + ", " + shipSquares.get(i).getDown());
         }
         return this;
     }

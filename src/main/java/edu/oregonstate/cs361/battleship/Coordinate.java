@@ -24,7 +24,13 @@ public class Coordinate {
         return Across;
     }
 
-    public void setAcross(int across) {
-        Across = across;
+    public void setAcross(int across) { Across = across; }
+
+    public boolean equals(Object o) {
+        Coordinate x = (Coordinate) o;
+        if (x.Across == Across && x.Down == Down) {
+            return true;
+        }
+        return false;
     }
 }
