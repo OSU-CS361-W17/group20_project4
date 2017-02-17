@@ -69,8 +69,12 @@ public class BattleshipModel {
          */
         overlapResult = false;
         offBoard = false;
-
+        System.out.println("start of placeShips. shipSquares contains: ");
+        for (int i = 0; i < shipSquares.size(); i++) {
+            System.out.println(shipSquares.get(i).getAcross() + ", " + shipSquares.get(i).getDown());
+        }
         if (this.getShip(shipName).alreadyPlaced()) {
+            System.out.println("hey you've placed this before...");
             shipSquares.removeAll(this.getShip(shipName).getShipSquares());
         }
 
@@ -119,6 +123,10 @@ public class BattleshipModel {
         }
         // if no overlap + not off the board, leave the ship alone and add its squares to the master list
         shipSquares.addAll(this.getShip(shipName).getShipSquares());
+        System.out.println("end of placeShips. shipSquares contains: ");
+        for (int i = 0; i < shipSquares.size(); i++) {
+            System.out.println(shipSquares.get(i).getAcross() + ", " + shipSquares.get(i).getDown());
+        }
         return this;
     }
 
