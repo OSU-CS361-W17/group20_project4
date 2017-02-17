@@ -36,36 +36,43 @@ class BattleshipModelTest {
         assertEquals(false,
                 testIfCovers(model, "AircraftCarrier","1","1","vertical",9,9));
 
-        assertEquals(true,
+        /* For the following four chunks of cover-tests, the first two lines of each have been changed to expect "false"
+        instead of "true". This is in light of leian7's new ship-overlap detection feature (2017-02-17); since an
+        aircraft carrier was already placed at (1, 1) above, none of the following ships are able to be placed, and
+        thus it is impossible for the following ships to cover any squares.
+
+        These tests can be revisited and improved in the future.
+         */
+        assertEquals(false,
                     testIfCovers(model, "Battleship","1","1","horizontal",1,1));
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Battleship","1","1","vertical",1,1));
         assertEquals(false,
                 testIfCovers(model, "Battleship","1","1","horizontal",9,9));
         assertEquals(false,
                 testIfCovers(model, "Battleship","1","1","vertical",9,9));
 
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Cruiser","1","1","horizontal",1,1));
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Cruiser","1","1","vertical",1,1));
         assertEquals(false,
                 testIfCovers(model, "Cruiser","1","1","horizontal",9,9));
         assertEquals(false,
                 testIfCovers(model, "Cruiser","1","1","vertical",9,9));
 
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Destroyer","1","1","horizontal",1,1));
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Destroyer","1","1","vertical",1,1));
         assertEquals(false,
                 testIfCovers(model, "Destroyer","1","1","horizontal",9,9));
         assertEquals(false,
                 testIfCovers(model, "Destroyer","1","1","vertical",9,9));
 
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Submarine","1","1","horizontal",1,1));
-        assertEquals(true,
+        assertEquals(false,
                 testIfCovers(model, "Submarine","1","1","vertical",1,1));
         assertEquals(false,
                 testIfCovers(model, "Submarine","1","1","horizontal",9,9));
