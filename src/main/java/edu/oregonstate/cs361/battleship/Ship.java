@@ -1,5 +1,7 @@
 package edu.oregonstate.cs361.battleship;
 
+import java.util.ArrayList;
+
 /**
  * Created by michaelhilton on 1/5/17.
  */
@@ -21,6 +23,44 @@ public class Ship {
         start = s;
         end = e;
 
+    }
+
+    /* returns true if this ship is horizontal... it can be assumed that neither the start nor end coordinates of the
+     * ship contain 0s since this funct is only called after the [user] ship has been placed */
+    public boolean isHorizontal() {
+        // if ship's start and end coordinates share the same Across (row), must be horizontal
+        if(start.getAcross() == end.getAcross()){
+            return true;
+        }
+        // if ship's start and end coordinates share the same Down (col), must be vertical
+        else if (start.getDown() == end.getDown()) {
+            return false;
+        }
+        return false;
+    }
+
+    /* this funct will only be called when the user attempts to assign a ship a position with a starting coordinate
+     * guaranteed to be between 1 and 10, inclusive... therefore, it is impossible for ``this`` ship to have a start or
+     * end coordinate that is (0,0) */
+    public ArrayList<Coordinate> getShipSquares() {
+        ArrayList<Coordinate> shipSquares = new ArrayList<>();      // will hold all the placed ship's squares
+
+        // if this ship is horiz, loop horizontally to grab all its squares
+        if (this.isHorizontal()) {
+            for (int i = start.getDown(); i <= start.getDown() + length; i++) {
+                Coordinate square = new Coordinate(start.getAcross(), i);
+                shipSquares.add(square);
+            }
+        }
+        // otherwise if this ship is vert, loop vertically to grab all its squares
+        else {
+            for (int i = start.getAcross(); i <= start.getAcross() + length; i++) {
+                Coordinate square = new Coordinate(i, start.getDown());
+                shipSquares.add(square);
+            }
+
+        }
+        return shipSquares;
     }
 
     public boolean covers(Coordinate test) {
@@ -77,45 +117,5 @@ public class Ship {
             return true;
         }
         return false;
-    }
-
-    public boolean overlaps(Ship ship) {
-        Ship shortShip;
-        Ship longShip;
-        boolean overlap = false;
-        Coordinate test = new Coordinate(0, 0);
-        Coordinate test2 = new Coordinate(0, 0);
-
-        if (this.length <= ship.length) {
-            shortShip = this;
-            longShip = ship;
-        }
-        else {
-            shortShip = ship;
-            longShip = this;
-        }
-
-        // for each square in shorter ship, does longer ship share the same square?
-        for (int i = 0; i <= shortShip.length; i++) {
-            // if longShip horizontal, want to loop through length horizontally
-            if(longShip.start.getAcross() == longShip.end.getAcross()) {
-                test.setAcross(shortShip.start.getAcross() + i);
-                test2.setAcross(shortShip.start.getAcross() - i);
-                test.setDown(shortShip.start.getDown());
-                test2.setDown(shortShip.start.getDown());
-            }
-            // if longShip vertical, want to loop through length vertically
-            else if(longShip.start.getDown() == longShip.end.getDown()) {
-                test.setDown(shortShip.start.getDown() + i);
-                test2.setDown(shortShip.start.getDown() - i);
-                test.setAcross(shortShip.start.getAcross());
-                test2.setAcross(shortShip.start.getAcross());
-            }
-            overlap = longShip.covers(test) || longShip.covers(test2);
-            if (overlap) {
-                break;
-            }
-        }
-        return overlap;
     }
 }
