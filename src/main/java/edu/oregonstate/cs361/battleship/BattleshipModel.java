@@ -30,6 +30,7 @@ public class BattleshipModel {
 
     boolean scanResult = false;
     boolean overlapResult = false;
+    boolean offBoard = false;
 
 
     public BattleshipModel() {
@@ -67,6 +68,7 @@ public class BattleshipModel {
         the squares-occupied-by-current-ships masterlist...
          */
         overlapResult = false;
+        offBoard = false;
 
         if (this.getShip(shipName).alreadyPlaced()) {
             shipSquares.removeAll(this.getShip(shipName).getShipSquares());
@@ -101,6 +103,12 @@ public class BattleshipModel {
 
         // for each square that the freshly placed ship now occupies...
         for (int i = 0; i < this.getShip(shipName).getShipSquares().size(); i++) {
+            if (this.getShip(shipName).getShipSquares().get(i).getAcross() > 10 || this.getShip(shipName).getShipSquares().get(i).getDown() > 10) {
+                offBoard = true;
+                // "un-place" ship
+                this.getShip(shipName).setLocation(new Coordinate(0,0), new Coordinate(0, 0));
+                return this;
+            }
             // if master list already contains one of the new ship's squares, it's an overlap!
             if (shipSquares.contains(this.getShip(shipName).getShipSquares().get(i))) {
                 overlapResult = true;
@@ -109,7 +117,7 @@ public class BattleshipModel {
                 return this;
             }
         }
-        // if no overlap, leave the ship alone and add its squares to the master list
+        // if no overlap + not off the board, leave the ship alone and add its squares to the master list
         shipSquares.addAll(this.getShip(shipName).getShipSquares());
         return this;
     }

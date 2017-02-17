@@ -116,8 +116,12 @@ function displayGameState(gameModel){
     $( '#MyBoard td'  ).css("background-color", "blue");
     $( '#TheirBoard td'  ).css("background-color", "blue");
 
+    if (gameModel.offBoard) {
+        alert("Your ship will be off the board if you place it there! Please try again.")
+    }
+
     if (gameModel.overlapResult) {
-        alert("Your ships can't overlap, try again.");
+        alert("Your new ship will overlap another ship if you place it there! Please try again.");
     }
 
     displayShip(gameModel.aircraftCarrier);
