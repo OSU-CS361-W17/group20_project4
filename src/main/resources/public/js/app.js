@@ -113,8 +113,9 @@ function log(logContents){
 }
 
 function displayGameState(gameModel){
-    $( '#MyBoard td'  ).css("background-color","blue");
-    $( '#TheirBoard td'  ).css("background-color", "blue");
+    // the following overwrites any residual ship icons from the previous game state with a lame screenshot of #0000ff
+    //this is necessary due to the way we implemented the ship icons
+    $( '#MyBoard td' ).css("background-image", "url('http://imgur.com/a/D5WtN')");
 
     if (gameModel.offBoard) {
         alert("Your ship will be off the board if you place it there! Please try again.")
