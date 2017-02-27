@@ -47,14 +47,14 @@ public class Ship {
 
         // if this ship is horiz, loop horizontally to grab all its squares
         if (this.isHorizontal()) {
-            for (int i = start.getDown(); i <= start.getDown() + length; i++) {
+            for (int i = start.getDown(); i < start.getDown() + length; i++) {
                 Coordinate square = new Coordinate(start.getAcross(), i);
                 shipSquares.add(square);
             }
         }
         // otherwise if this ship is vert, loop vertically to grab all its squares
         else {
-            for (int i = start.getAcross(); i <= start.getAcross() + length; i++) {
+            for (int i = start.getAcross(); i < start.getAcross() + length; i++) {
                 Coordinate square = new Coordinate(i, start.getDown());
                 shipSquares.add(square);
             }

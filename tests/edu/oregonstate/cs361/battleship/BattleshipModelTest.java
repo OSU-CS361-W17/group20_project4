@@ -94,13 +94,13 @@ class BattleshipModelTest {
         assertEquals(2, model.computerHits.get(0).getAcross());
         assertEquals(3, model.computerHits.get(0).getDown());
 
-        model.shootAtComputer(6,8) ;
-        assertEquals(6, model.computerHits.get(1).getAcross());
+        model.shootAtComputer(5,8) ;
+        assertEquals(5, model.computerHits.get(1).getAcross());
         assertEquals(8, model.computerHits.get(1).getDown());
 
-        model.shootAtComputer(4,4) ;
+        model.shootAtComputer(4,3) ;
         assertEquals(4, model.computerHits.get(2).getAcross());
-        assertEquals(4, model.computerHits.get(2).getDown());
+        assertEquals(3, model.computerHits.get(2).getDown());
 
         model.shootAtComputer(7,3) ;
         assertEquals(7, model.computerHits.get(3).getAcross());
