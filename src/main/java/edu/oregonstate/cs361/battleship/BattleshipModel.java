@@ -131,6 +131,8 @@ public class BattleshipModel {
     }
 
     public void shootAtComputer(int row, int col) {
+        overlapResult = false;
+        offBoard = false;
         Coordinate coor = new Coordinate(row,col);
         if(computer_aircraftCarrier.covers(coor)){
             computerHits.add(coor);
