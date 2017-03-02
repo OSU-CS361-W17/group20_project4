@@ -39,7 +39,7 @@ import java.util.Random;
     }
 
 
-    public Ship getShip(String shipName) {
+    public Military getShip(String shipName) {
         if (shipName.equalsIgnoreCase("aircraftcarrier")) {
             return aircraftCarrier;
         } if(shipName.equalsIgnoreCase("battleship")) {

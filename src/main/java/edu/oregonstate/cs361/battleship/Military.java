@@ -12,4 +12,6 @@ public class Military extends Ship {
         stealth = b;
     }
 
+
+
 }
