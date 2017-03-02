@@ -6,10 +6,20 @@ import java.util.ArrayList;
  * Created by michaelhilton on 1/5/17.
  */
 public class Ship {
-    private String name;
-    private int length;
-    private Coordinate start;
-    private Coordinate end;
+    protected String name;
+    protected int length;
+    protected Coordinate start;
+    protected Coordinate end;
+
+    public Ship() {
+        name = "";
+        length = 0;
+        start.setAcross(0);
+        start.setDown(0);
+        end.setAcross(0);
+        end.setDown(0);
+
+    }
 
     public Ship() {}
 
