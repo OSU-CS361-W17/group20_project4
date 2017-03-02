@@ -11,6 +11,16 @@ public class Ship {
     private Coordinate start;
     private Coordinate end;
 
+    public Ship() {
+        name = "";
+        length = 0;
+        start.setAcross(0);
+        start.setDown(0);
+        end.setAcross(0);
+        end.setDown(0);
+
+    }
+
     public Ship(String n, int l,Coordinate s, Coordinate e) {
         name = n;
         length = l;
@@ -119,3 +129,4 @@ public class Ship {
         return false;
     }
 }
+
