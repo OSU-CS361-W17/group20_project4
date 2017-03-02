@@ -7,19 +7,15 @@ import java.util.Random;
 /**
  * Created by michaelhilton on 1/4/17.
  */
-public class BattleshipModel {
+ public class BattleshipModel {
 
-    private Ship aircraftCarrier = new Ship("AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
-    private Ship battleship = new Ship("Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
-    private Ship cruiser = new Ship("Cruiser",3, new Coordinate(0,0),new Coordinate(0,0));
-    private Ship destroyer = new Ship("Destroyer",2, new Coordinate(0,0),new Coordinate(0,0));
-    private Ship submarine = new Ship("Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
+    private Military aircraftCarrier = new Military(false,"AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
+    private Military battleship = new Military(true,"Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
+    private Military submarine = new Military(true,"Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
-    private Ship computer_aircraftCarrier = new Ship("Computer_AircraftCarrier",5, new Coordinate(2,2),new Coordinate(2,6));
-    private Ship computer_battleship = new Ship("Computer_Battleship",4, new Coordinate(2,8),new Coordinate(5,8));
-    private Ship computer_cruiser = new Ship("Computer_Cruiser",3, new Coordinate(4,1),new Coordinate(4,3));
-    private Ship computer_destroyer = new Ship("Computer_Destroyer",2, new Coordinate(7,3),new Coordinate(7,4));
-    private Ship computer_submarine = new Ship("Computer_Submarine",2, new Coordinate(9,6),new Coordinate(9,7));
+    private Military computer_aircraftCarrier = new Military(false,"Computer_AircraftCarrier",5, new Coordinate(2,2),new Coordinate(2,6));
+    private Military computer_battleship = new Military(true,"Computer_Battleship",4, new Coordinate(2,8),new Coordinate(5,8));
+    private Military computer_submarine = new Military(true,"Computer_Submarine",2, new Coordinate(9,6),new Coordinate(9,7));
 
     ArrayList<Coordinate> playerHits;
     private ArrayList<Coordinate> playerMisses;
@@ -48,11 +44,7 @@ public class BattleshipModel {
             return aircraftCarrier;
         } if(shipName.equalsIgnoreCase("battleship")) {
             return battleship;
-        } if(shipName.equalsIgnoreCase("Cruiser")) {
-        return cruiser;
-        } if(shipName.equalsIgnoreCase("destroyer")) {
-            return destroyer;
-        }if(shipName.equalsIgnoreCase("submarine")) {
+        } if(shipName.equalsIgnoreCase("submarine")) {
             return submarine;
         } else {
             return null;
@@ -67,7 +59,7 @@ public class BattleshipModel {
         replacing, i.e. it's coming in with initialized head-butts that aren't zeroed out, remove all its squares from
         the squares-occupied-by-current-ships masterlist...
          */
-        overlapResult = false;
+       overlapResult = false;
         offBoard = false;
         /*System.out.println("start of placeShips. shipSquares contains: ");
         for (int i = 0; i < shipSquares.size(); i++) {
@@ -83,11 +75,7 @@ public class BattleshipModel {
                 this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+4));
             } if(shipName.equalsIgnoreCase("battleship")) {
                 this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+3));
-            } if(shipName.equalsIgnoreCase("Cruiser")) {
-                this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2));
-            } if(shipName.equalsIgnoreCase("destroyer")) {
-                this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+1));
-            }if(shipName.equalsIgnoreCase("submarine")) {
+            } if(shipName.equalsIgnoreCase("submarine")) {
                 this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt+1));
             }
         }else{
@@ -96,11 +84,7 @@ public class BattleshipModel {
                     this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+4,colInt));
                 } if(shipName.equalsIgnoreCase("battleship")) {
                     this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+3,colInt));
-                } if(shipName.equalsIgnoreCase("Cruiser")) {
-                    this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt));
-                } if(shipName.equalsIgnoreCase("destroyer")) {
-                    this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+1,colInt));
-                }if(shipName.equalsIgnoreCase("submarine")) {
+                } if(shipName.equalsIgnoreCase("submarine")) {
                     this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 1, colInt));
                 }
         }
@@ -138,10 +122,6 @@ public class BattleshipModel {
             computerHits.add(coor);
         }else if (computer_battleship.covers(coor)){
             computerHits.add(coor);
-        }else if (computer_cruiser.covers(coor)){
-            computerHits.add(coor);
-        }else if (computer_destroyer.covers(coor)){
-            computerHits.add(coor);
         }else if (computer_submarine.covers(coor)){
             computerHits.add(coor);
         } else {
@@ -169,10 +149,6 @@ public class BattleshipModel {
             playerHits.add(coor);
         }else if (battleship.covers(coor)){
             playerHits.add(coor);
-        }else if (cruiser.covers(coor)){
-            playerHits.add(coor);
-        }else if (destroyer.covers(coor)){
-            playerHits.add(coor);
         }else if (submarine.covers(coor)){
             playerHits.add(coor);
         } else {
@@ -188,10 +164,6 @@ public class BattleshipModel {
             scanResult = true;
         }
         else if (computer_battleship.scan(coor)){
-            scanResult = true;
-        }else if (computer_cruiser.scan(coor)){
-            scanResult = true;
-        }else if (computer_destroyer.scan(coor)){
             scanResult = true;
         }else if (computer_submarine.scan(coor)){
             scanResult = true;
