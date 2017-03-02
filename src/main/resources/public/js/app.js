@@ -127,8 +127,8 @@ function displayGameState(gameModel){
 
     displayShip(gameModel.aircraftCarrier);
     displayShip(gameModel.battleship);
-    displayShip(gameModel.cruiser);
-    displayShip(gameModel.destroyer);
+   // displayShip(gameModel.cruiser);
+    //displayShip(gameModel.destroyer);
     displayShip(gameModel.submarine);
 
     displayHits(gameModel);
