@@ -16,26 +16,28 @@
 <div class = "information">
 	<p class = "title">Instructions</p>
 	<p>
-	Battleship begins with both players choosing their ship positions, which you can access from the place ship box.
-	Your ships will appear on the board as ship icons, while your opponent's ships are hidden from you.
-	Once you place all your ships you are ready to fire at your opponent by guessing their ship locations.
-	The objective of battleship is to sink all of your opponent's ships by hitting each grid square that a ship exists on.
-	Click a square on their grid to select it, and click the button that says fire to confirm the action.
-	Following your action the grid square chosen will change to indicate whether you have hit (X) or missed (O).
-	Immediately following your action the AI opponent will take their action--with the grid square chosen being marked on your grid.
-	Additionally you can select a square to scan for ships, and click the scan button to proceed instead of using fire.
-	This feature works by sending you a popup alerting you if there a ship within the scaned area.
-	The scaned area is defined as the squares surrounding (up, down, left, right) and including the grid square selected.
-	Continue firing at your opponent until either one of you has won the game by reaching as many hits as there are ship squares on a grid.
-	The reset button can be used to start the game over.
-	</p>
-	
-	
-	<p class = "title">Hits and Misses</p>
-    <label> Player hits: <div id="computerHits">0</div></label>
-    <label> Player misses: <div id="computerMisses">0</div></label>
-    <label> Computer hits: <div id="playerHits">0</div></label>
-    <label> Computer misses: <div id="playerMisses">0</div></label>
+        Battleship begins with both players choosing their ship positions, which you can access from the place ship box.
+        Once you place all your ships you are ready to fire at your opponent.
+        The objective of battleship is to sink all of your opponent's ships by hitting each grid square that a ship exists on.
+        Click a square on their grid to select it, and click fire to confirm the action.
+        Following your action the square will change to indicate whether you have hit (X) or missed (O).
+        The AI player then gets a chance to shoot at your board.
+        You can also select a square to scan for ships, and click the scan button to proceed instead of using fire.
+        The scanned area is defined as the squares surrounding (up, down, left, right) and including the grid square selected.
+        If your scan finds a ship, an alert will appear that lets you know.
+        Continue firing at your opponent until either one of you wins!
+        The reset button can be used to start the game over.
+        <br/>
+        <hr/>
+        <br/>
+        In addition to the above, our battleship game now contains new features.
+        The kinds of ships are now split into military and civilian ships, and have different features accordingly.
+        Civilian ships - the clipper and the dinghy - don't have armor like military ships do.
+        Because of this, they'll sink in one hit!
+        Some of the military ships - the battleship and the submarine - now have a stealth capability due to cutting edge research.
+        These two ships won't show up when you scan a location on the board, meaning that you'll only be able to tell they're there by firing at them and hitting them.
+    </p>
+
 </div>
 
 <div id ="Options" class="GameOptions">
@@ -99,6 +101,15 @@
 	<FORM style = "width: 100%; text-align: center;">
 	<INPUT TYPE="button" onClick="history.go(0)" VALUE="RESET">
 	</FORM>
+
+    <br/>
+    <hr/>
+
+    <p class = "title">Hits and Misses</p>
+    <label> Player hits: <div id="computerHits">0</div></label>
+    <label> Player misses: <div id="computerMisses">0</div></label>
+    <label> Computer hits: <div id="playerHits">0</div></label>
+    <label> Computer misses: <div id="playerMisses">0</div></label>
 	
 </div>
 
