@@ -12,7 +12,8 @@ class ShipTest {
     @Test
     public void testPlaceShipConstructor() {
         Ship s = new Ship();
-        //assertEquals("", s.getName());
+        assertEquals("", s.getName());
+        assertEquals(false, s.covers(new Coordinate(10,10)));
     }
 
     @Test
