@@ -21,6 +21,7 @@ public class Ship {
 
     }
 
+
     public Ship(String n, int l,Coordinate s, Coordinate e) {
         name = n;
         length = l;

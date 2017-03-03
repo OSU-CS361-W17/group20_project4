@@ -9,7 +9,13 @@ import java.util.Random;
  */
  public class BattleshipModel {
 
-    private Military aircraftCarrier = new Military(false,"AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
+    private Civilian clipper = new Civilian("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
+    private Civilian dinghy = new Civilian("Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
+
+    private Civilian computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
+    private Civilian computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(10, 10), new Coordinate(10, 10));
+    
+	private Military aircraftCarrier = new Military(false,"AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
     private Military battleship = new Military(true,"Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
     private Military submarine = new Military(true,"Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
@@ -39,17 +45,22 @@ import java.util.Random;
     }
 
 
-    public Military getShip(String shipName) {
+    public Ship getShip(String shipName) {
         if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-            return aircraftCarrier;
+            return this.aircraftCarrier;
         } if(shipName.equalsIgnoreCase("battleship")) {
-            return battleship;
+            return this.battleship;
         } if(shipName.equalsIgnoreCase("submarine")) {
-            return submarine;
+            return this.submarine;
+        }if(shipName.equalsIgnoreCase("clipper")) {
+            return this.clipper;
+        }if(shipName.equalsIgnoreCase("dinghy")) {
+            return this.dinghy;
         } else {
             return null;
         }
     }
+
 
     public BattleshipModel placeShip(String shipName, String row, String col, String orientation) {
         int rowint = Integer.parseInt(row);
@@ -77,6 +88,10 @@ import java.util.Random;
                 this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+3));
             } if(shipName.equalsIgnoreCase("submarine")) {
                 this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt+1));
+            }if(shipName.equalsIgnoreCase("clipper")) {
+                this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt+2));
+            }if(shipName.equalsIgnoreCase("dinghy")) {
+                this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt));
             }
         }else{
             //vertical
@@ -86,6 +101,10 @@ import java.util.Random;
                     this.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+3,colInt));
                 } if(shipName.equalsIgnoreCase("submarine")) {
                     this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 1, colInt));
+                } if(shipName.equalsIgnoreCase("clipper")) {
+                    this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint+2, colInt));
+                } if(shipName.equalsIgnoreCase("dinghy")) {
+                    this.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt));
                 }
         }
 
@@ -124,6 +143,10 @@ import java.util.Random;
             computerHits.add(coor);
         }else if (computer_submarine.covers(coor)){
             computerHits.add(coor);
+        }else if (computer_clipper.covers(coor)){
+            computerHits.addAll(computer_clipper.one_hit());
+        }else if (computer_dinghy.covers(coor)){
+            computerHits.addAll(computer_dinghy.one_hit());
         } else {
             computerMisses.add(coor);
         }
@@ -151,6 +174,10 @@ import java.util.Random;
             playerHits.add(coor);
         }else if (submarine.covers(coor)){
             playerHits.add(coor);
+        }else if (clipper.covers(coor)){
+            playerHits.addAll(clipper.one_hit());
+        }else if (dinghy.covers(coor)){
+            playerHits.addAll(dinghy.one_hit());
         } else {
             playerMisses.add(coor);
         }
@@ -166,6 +193,10 @@ import java.util.Random;
         else if (computer_battleship.scan(coor)){
             scanResult = true;
         }else if (computer_submarine.scan(coor)){
+            scanResult = true;
+        }else if (computer_clipper.scan(coor)){
+            scanResult = true;
+        }else if (computer_dinghy.scan(coor)) {
             scanResult = true;
         } else {
             scanResult = false;
