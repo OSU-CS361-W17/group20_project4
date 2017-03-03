@@ -14,8 +14,8 @@ class BattleshipModelTest {
         BattleshipModel model = new BattleshipModel();
         assertEquals("AircraftCarrier",model.getShip("AircraftCarrier").getName());
         assertEquals("Battleship",model.getShip("battleship").getName());
-        assertEquals("Cruiser",model.getShip("Cruiser").getName());
-        assertEquals("Destroyer",model.getShip("Destroyer").getName());
+        assertEquals("Clipper",model.getShip("Clipper").getName());
+        assertEquals("Dinghy",model.getShip("Dinghy").getName());
         assertEquals("Submarine",model.getShip("Submarine").getName());
         assertNull(model.getShip("SS Minnow"));
     }
@@ -53,22 +53,22 @@ class BattleshipModelTest {
                 testIfCovers(model, "Battleship","1","1","vertical",9,9));
 
         assertEquals(false,
-                testIfCovers(model, "Cruiser","1","1","horizontal",1,1));
+                testIfCovers(model, "Clipper","1","1","horizontal",1,1));
         assertEquals(false,
-                testIfCovers(model, "Cruiser","1","1","vertical",1,1));
+                testIfCovers(model, "Clipper","1","1","vertical",1,1));
         assertEquals(false,
-                testIfCovers(model, "Cruiser","1","1","horizontal",9,9));
+                testIfCovers(model, "Clipper","1","1","horizontal",9,9));
         assertEquals(false,
-                testIfCovers(model, "Cruiser","1","1","vertical",9,9));
+                testIfCovers(model, "Clipper","1","1","vertical",9,9));
 
         assertEquals(false,
-                testIfCovers(model, "Destroyer","1","1","horizontal",1,1));
+                testIfCovers(model, "Dinghy","1","1","horizontal",1,1));
         assertEquals(false,
-                testIfCovers(model, "Destroyer","1","1","vertical",1,1));
+                testIfCovers(model, "Dinghy","1","1","vertical",1,1));
         assertEquals(false,
-                testIfCovers(model, "Destroyer","1","1","horizontal",9,9));
+                testIfCovers(model, "Dinghy","1","1","horizontal",9,9));
         assertEquals(false,
-                testIfCovers(model, "Destroyer","1","1","vertical",9,9));
+                testIfCovers(model, "Dinghy","1","1","vertical",9,9));
 
         assertEquals(false,
                 testIfCovers(model, "Submarine","1","1","horizontal",1,1));
@@ -98,17 +98,21 @@ class BattleshipModelTest {
         assertEquals(5, model.computerHits.get(1).getAcross());
         assertEquals(8, model.computerHits.get(1).getDown());
 
-        model.shootAtComputer(4,3) ;
-        assertEquals(4, model.computerHits.get(2).getAcross());
-        assertEquals(3, model.computerHits.get(2).getDown());
-
-        model.shootAtComputer(7,3) ;
-        assertEquals(7, model.computerHits.get(3).getAcross());
-        assertEquals(3, model.computerHits.get(3).getDown());
+        model.shootAtComputer(5,1) ;
+        assertEquals(5, model.computerHits.get(2).getAcross());
+        assertEquals(1, model.computerHits.get(2).getDown());
+        assertEquals(5, model.computerHits.get(3).getAcross());
+        assertEquals(2, model.computerHits.get(3).getDown());
+        assertEquals(5, model.computerHits.get(4).getAcross());
+        assertEquals(3, model.computerHits.get(4).getDown());
 
         model.shootAtComputer(9,6) ;
-        assertEquals(9, model.computerHits.get(4).getAcross());
-        assertEquals(6, model.computerHits.get(4).getDown());
+        assertEquals(9, model.computerHits.get(5).getAcross());
+        assertEquals(6, model.computerHits.get(5).getDown());
+
+        model.shootAtComputer(10,10) ;
+        assertEquals(10, model.computerHits.get(6).getAcross());
+        assertEquals(10, model.computerHits.get(6).getDown());
     }
 
 
@@ -117,8 +121,8 @@ class BattleshipModelTest {
         BattleshipModel model = new BattleshipModel();
         model.placeShip("Aircraftcarrier","1","5","horizontal");
         model.placeShip("Battleship","2","4","horizontal");
-        model.placeShip("Cruiser","3","3","horizontal");
-        model.placeShip("Destroyer","4","2","horizontal");
+        model.placeShip("Clipper","3","3","horizontal");
+        model.placeShip("Dinghy","4","2","horizontal");
         model.placeShip("Submarine","5","1","horizontal");
 
         model.playerShot(new Coordinate(9,9));
@@ -136,13 +140,15 @@ class BattleshipModelTest {
         assertEquals(3, model.playerHits.get(2).getAcross());
         assertEquals(3, model.playerHits.get(2).getDown());
 
+        //Note: since the above shot added three coordinates to the hit array, we next check index 5, not index 3.
         model.playerShot(new Coordinate(4,2));
-        assertEquals(4, model.playerHits.get(3).getAcross());
-        assertEquals(2, model.playerHits.get(3).getDown());
+        assertEquals(4, model.playerHits.get(5).getAcross());
+        assertEquals(2, model.playerHits.get(5).getDown());
 
+        //The dinghy only adds one hit, so we continue incrementing as normal.
         model.playerShot(new Coordinate(5,1));
-        assertEquals(5, model.playerHits.get(4).getAcross());
-        assertEquals(1, model.playerHits.get(4).getDown());
+        assertEquals(5, model.playerHits.get(6).getAcross());
+        assertEquals(1, model.playerHits.get(6).getDown());
     }
 
     @Test

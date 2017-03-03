@@ -10,6 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShipTest {
 
     @Test
+    public void testPlaceShipConstructor() {
+        Ship s = new Ship();
+        assertEquals("", s.getName());
+        assertEquals(false, s.covers(new Coordinate(10,10)));
+    }
+
+    @Test
     public void testPlaceShip() {
         Ship s = new Ship("AircraftCarrier",5, new Coordinate(5,2),new Coordinate(5,7));
         assertEquals(true,s.covers(new Coordinate(5,2)));
