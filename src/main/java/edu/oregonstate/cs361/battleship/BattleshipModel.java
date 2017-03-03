@@ -45,17 +45,17 @@ import java.util.Random;
     }
 
 
-    public Military getShip(String shipName) {
+    public Ship getShip(String shipName) {
         if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-            return aircraftCarrier;
+            return this.aircraftCarrier;
         } if(shipName.equalsIgnoreCase("battleship")) {
-            return battleship;
+            return this.battleship;
         } if(shipName.equalsIgnoreCase("submarine")) {
-            return submarine;
+            return this.submarine;
         }if(shipName.equalsIgnoreCase("clipper")) {
-            return clipper;
+            return this.clipper;
         }if(shipName.equalsIgnoreCase("dinghy")) {
-            return dinghy;
+            return this.dinghy;
         } else {
             return null;
         }
