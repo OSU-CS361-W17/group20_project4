@@ -189,8 +189,7 @@ import java.util.Random;
         scanResult = false;
         if(computer_aircraftCarrier.scan(coor)){
             scanResult = true;
-        }
-        else if (computer_battleship.scan(coor)){
+        } else if (computer_battleship.scan(coor)){
             scanResult = true;
         }else if (computer_submarine.scan(coor)){
             scanResult = true;
