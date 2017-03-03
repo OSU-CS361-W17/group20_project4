@@ -14,11 +14,8 @@ public class Ship {
     public Ship() {
         name = "";
         length = 0;
-        start.setAcross(0);
-        start.setDown(0);
-        end.setAcross(0);
-        end.setDown(0);
-
+        start = new Coordinate(0, 0);
+        end = new Coordinate(0, 0);
     }
 
 
