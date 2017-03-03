@@ -127,8 +127,8 @@ function displayGameState(gameModel){
 
     displayShip(gameModel.aircraftCarrier);
     displayShip(gameModel.battleship);
-   // displayShip(gameModel.cruiser);
-    //displayShip(gameModel.destroyer);
+    displayShip(gameModel.clipper);
+    displayShip(gameModel.dinghy);
     displayShip(gameModel.submarine);
 
     displayHits(gameModel);
@@ -181,7 +181,8 @@ function displayShip(ship){
     startCoordDown = ship.start.Down;
     endCoordAcross = ship.end.Across;
     endCoordDown = ship.end.Down;
-    // console.log(startCoordAcross);
+    //console.log("in display");
+    //console.log(startCoordAcross, endCoordAcross);
     if(startCoordAcross > 0){
         if(startCoordAcross == endCoordAcross){
             for (i = startCoordDown; i <= endCoordDown; i++) {

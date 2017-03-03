@@ -126,8 +126,8 @@ import java.util.Random;
         }
         // if no overlap + not off the board, leave the ship alone and add its squares to the master list
         shipSquares.addAll(this.getShip(shipName).getShipSquares());
-        /*System.out.println("end of placeShips. shipSquares contains: ");
-        for (int i = 0; i < shipSquares.size(); i++) {
+        //System.out.println("end of placeShips. shipSquares contains: ");
+        /*for (int i = 0; i < shipSquares.size(); i++) {
             System.out.println(shipSquares.get(i).getAcross() + ", " + shipSquares.get(i).getDown());
         }*/
         return this;
