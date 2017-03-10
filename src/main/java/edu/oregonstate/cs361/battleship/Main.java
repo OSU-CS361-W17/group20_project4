@@ -10,6 +10,7 @@ import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
 public class Main {
+    // TODO: identify mode
     // add easy/hard bool here?...
 
     public static void main(String[] args) {

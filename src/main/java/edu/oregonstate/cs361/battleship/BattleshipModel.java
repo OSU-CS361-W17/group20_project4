@@ -157,11 +157,10 @@ import java.util.Random;
     }
 
     public void shootAtPlayer() {
-        int max = 10;
-        int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
+        // TODO: actual pattern implementation.
+        // Below is to test inheritance.
+        int randRow = 2;
+        int randCol = 2;
 
         Coordinate coor = new Coordinate(randRow,randCol);
         playerShot(coor);
