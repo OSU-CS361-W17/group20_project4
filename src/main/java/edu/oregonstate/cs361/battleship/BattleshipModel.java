@@ -34,6 +34,9 @@ import java.util.Random;
     boolean overlapResult = false;
     boolean offBoard = false;
 
+    int snakeRow = 1;
+    int snakeCol = 1;
+
 
     public BattleshipModel() {
         playerHits = new ArrayList<>();
@@ -153,14 +156,25 @@ import java.util.Random;
     }
 
     public void shootAtPlayer() {
-        int max = 10;
+        Coordinate coor = new Coordinate(snakeRow,snakeCol);
+        playerShot(coor);
+
+        if (snakeCol == 10) {
+            snakeCol = 1;
+            snakeRow++;
+        }
+        else {
+            snakeCol++;
+        }
+
+        /*int max = 10;
         int min = 1;
         Random random = new Random();
         int randRow = random.nextInt(max - min + 1) + min;
         int randCol = random.nextInt(max - min + 1) + min;
 
         Coordinate coor = new Coordinate(randRow,randCol);
-        playerShot(coor);
+        playerShot(coor); */
     }
 
     void playerShot(Coordinate coor) {
