@@ -10,12 +10,10 @@ public class HardBattleshipModel extends BattleshipModel {
     // warning: if extra variables introduced here, json/gson conversion may require extra magic in Main.java.
 
     public HardBattleshipModel() {
-        super();
-    }
-
-    @Override
-    public HardBattleshipModel placeShip(String shipName, String row, String col, String orientation) {
-        return this;
+        super();    // first initialize stuff using parent default constructor...
+        // then formally initialize computer ships (randomized starts and ends)
+        // Uncomment following line to test inheritance:
+        // computer_aircraftCarrier = new Military(false,"Computer_AircraftCarrier",5, new Coordinate(3,3),new Coordinate(3,7));
     }
 
     @Override

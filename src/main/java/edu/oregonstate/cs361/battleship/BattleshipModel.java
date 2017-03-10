@@ -10,17 +10,16 @@ import java.util.Random;
 
     private Civilian clipper = new Civilian("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
     private Civilian dinghy = new Civilian("Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
-
-    private Civilian computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
-    private Civilian computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(10, 10), new Coordinate(10, 10));
-    
 	private Military aircraftCarrier = new Military(false,"AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
     private Military battleship = new Military(true,"Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
     private Military submarine = new Military(true,"Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
-    private Military computer_aircraftCarrier = new Military(false,"Computer_AircraftCarrier",5, new Coordinate(2,2),new Coordinate(2,6));
-    private Military computer_battleship = new Military(true,"Computer_Battleship",4, new Coordinate(2,8),new Coordinate(5,8));
-    private Military computer_submarine = new Military(true,"Computer_Submarine",2, new Coordinate(9,6),new Coordinate(9,7));
+    // computer ships are formally initialized (hardcoded) in the default constructor.
+    protected Civilian computer_clipper;
+    protected Civilian computer_dinghy;
+    protected Military computer_aircraftCarrier;
+    protected Military computer_battleship;
+    protected Military computer_submarine;
 
     ArrayList<Coordinate> playerHits;
     private ArrayList<Coordinate> playerMisses;
@@ -35,6 +34,12 @@ import java.util.Random;
 
 
     public BattleshipModel() {
+        computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
+        computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(10, 10), new Coordinate(10, 10));
+        computer_aircraftCarrier = new Military(false,"Computer_AircraftCarrier",5, new Coordinate(2,2),new Coordinate(2,6));
+        computer_battleship = new Military(true,"Computer_Battleship",4, new Coordinate(2,8),new Coordinate(5,8));
+        computer_submarine = new Military(true,"Computer_Submarine",2, new Coordinate(9,6),new Coordinate(9,7));
+
         playerHits = new ArrayList<>();
         playerMisses= new ArrayList<>();
         computerHits = new ArrayList<>();
