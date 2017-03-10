@@ -10,6 +10,7 @@ import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
 public class Main {
+    // add easy/hard bool here?...
 
     public static void main(String[] args) {
         staticFiles.location("/public");
@@ -17,6 +18,9 @@ public class Main {
         //This will listen to GET requests to /model and return a clean new model
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
+
+        // add post path "/mode/:mode", (req, res) -> getMode(req) here?...
+
         post("/fire/:row/:col", (req, res) -> fireAt(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to scan
         post("/scan/:row/:col", (req, res) -> scan(req));
@@ -26,9 +30,13 @@ public class Main {
 
     //This function returns a new model
     private static String newModel() {
-        BattleshipModel bm = new BattleshipModel();
         Gson gson = new Gson();
+        // if easy mode,
+        BattleshipModel bm = new BattleshipModel();
         return gson.toJson(bm);
+        // else,
+        // HardBattleshipModel hbm = new HardBattleshipModel();
+        // return gson.toJson(hbm);
     }
 
     //This function accepts an HTTP request and deseralizes it into an actual Java object.
@@ -40,7 +48,10 @@ public class Main {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        // if easy,
         BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
+        // else hard,
+        // BattleshipModel modelFromReq = gson.fromJson(result, HardBattleshipModel.class);
         return modelFromReq;
     }
 
@@ -81,7 +92,4 @@ public class Main {
         Gson gson = new Gson();
         return gson.toJson(currModel);
     }
-
-
-
 }
