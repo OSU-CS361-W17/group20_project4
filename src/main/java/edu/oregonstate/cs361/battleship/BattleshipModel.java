@@ -32,6 +32,9 @@ import java.util.Random;
     boolean overlapResult = false;
     boolean offBoard = false;
 
+    int snakeRow = 1;
+    int snakeCol = 1;
+
 
     public BattleshipModel() {
         computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
@@ -157,13 +160,25 @@ import java.util.Random;
     }
 
     public void shootAtPlayer() {
-        // TODO: actual pattern implementation.
-        // Below is to test inheritance.
-        int randRow = 2;
-        int randCol = 2;
+        Coordinate coor = new Coordinate(snakeRow,snakeCol);
+        playerShot(coor);
+
+        if (snakeCol == 10) {
+            snakeCol = 1;
+            snakeRow++;
+        }
+        else {
+            snakeCol++;
+        }
+
+        /*int max = 10;
+        int min = 1;
+        Random random = new Random();
+        int randRow = random.nextInt(max - min + 1) + min;
+        int randCol = random.nextInt(max - min + 1) + min;
 
         Coordinate coor = new Coordinate(randRow,randCol);
-        playerShot(coor);
+        playerShot(coor); */
     }
 
     void playerShot(Coordinate coor) {
