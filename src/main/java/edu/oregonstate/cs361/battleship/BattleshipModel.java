@@ -170,15 +170,6 @@ import java.util.Random;
         else {
             snakeCol++;
         }
-
-        /*int max = 10;
-        int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
-
-        Coordinate coor = new Coordinate(randRow,randCol);
-        playerShot(coor); */
     }
 
     void playerShot(Coordinate coor) {
