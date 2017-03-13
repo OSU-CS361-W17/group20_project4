@@ -33,11 +33,11 @@ public class Main {
     private static String newModel() {
         Gson gson = new Gson();
         // if easy mode,
-        // BattleshipModel bm = new BattleshipModel();
-        // return gson.toJson(bm);
+        BattleshipModel bm = new BattleshipModel();
+        return gson.toJson(bm);
         // else,
-        HardBattleshipModel hbm = new HardBattleshipModel();
-        return gson.toJson(hbm);
+        //HardBattleshipModel hbm = new HardBattleshipModel();
+        //return gson.toJson(hbm);
     }
 
     //This function accepts an HTTP request and deseralizes it into an actual Java object.
@@ -50,9 +50,9 @@ public class Main {
             e.printStackTrace();
         }
         // if easy,
-        //BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
+        BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
         // else hard,
-        BattleshipModel modelFromReq = gson.fromJson(result, HardBattleshipModel.class);
+        //BattleshipModel modelFromReq = gson.fromJson(result, HardBattleshipModel.class);
         return modelFromReq;
     }
 
