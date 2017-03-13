@@ -21,6 +21,8 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
 
         // add post path "/mode/:mode", (req, res) -> getMode(req) here?...
+        post("/easyMode", (req, res) -> changeToEasyMode());
+        post("/hardMode", (req, res) -> changeToHardMode());
 
         post("/fire/:row/:col", (req, res) -> fireAt(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to scan
@@ -93,4 +95,33 @@ public class Main {
         Gson gson = new Gson();
         return gson.toJson(currModel);
     }
+
+    private static String changeToEasyMode() {
+
+        System.out.println("2ez");
+
+        Gson gson = new Gson();
+        // if easy mode,
+        BattleshipModel bm = new BattleshipModel();
+        return gson.toJson(bm);
+        // else,
+        //HardBattleshipModel hbm = new HardBattleshipModel();
+        //return gson.toJson(hbm);
+    }
+
+
+    private static String changeToHardMode() {
+
+        System.out.println("not ez");
+
+        Gson gson = new Gson();
+        // if easy mode,
+        //BattleshipModel bm = new BattleshipModel();
+        //return gson.toJson(bm);
+        // else,
+        HardBattleshipModel hbm = new HardBattleshipModel();
+        return gson.toJson(hbm);
+    }
+
+
 }

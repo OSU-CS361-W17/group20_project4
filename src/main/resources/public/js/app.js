@@ -107,6 +107,54 @@ function chosenScanFunc (reqURL) {
     });
 }
 
+function switchToEasyMode () {
+
+    console.log("gg ez");
+
+    //Send the request
+    var request = $.ajax({
+        url: "/easyMode",
+        method: "post",
+        data: JSON.stringify(gameModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    //If it's good, display the game state
+    request.done(function( currModel ) {
+        console.log("Staples");
+    });
+
+    //If it's not, error
+    request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+
+}
+
+function switchToHardMode () {
+
+    console.log("gg no re");
+
+    var request = $.ajax({
+        url: "/hardMode",
+        method: "post",
+        data: JSON.stringify(gameModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    //If it's good, display the game state
+    request.done(function( currModel ) {
+        console.log("No button");
+    });
+
+    //If it's not, error
+    request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+
+}
 
 function log(logContents){
     console.log(logContents);
