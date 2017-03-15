@@ -12,6 +12,7 @@ import static spark.Spark.staticFiles;
 public class Main {
     // TODO: identify mode
     // add easy/hard bool here?...
+    //boolean isEasy = true;      //Defaults to true - so easy mode is the default
 
     public static void main(String[] args) {
         staticFiles.location("/public");
@@ -34,9 +35,13 @@ public class Main {
     //This function returns a new model
     private static String newModel() {
         Gson gson = new Gson();
+
+        //The game should default to easy mode
         // if easy mode,
         BattleshipModel bm = new BattleshipModel();
         return gson.toJson(bm);
+
+
         // else,
         //HardBattleshipModel hbm = new HardBattleshipModel();
         //return gson.toJson(hbm);
@@ -100,13 +105,15 @@ public class Main {
 
         System.out.println("2ez");
 
+        //set global tracker of game mode to true
+        //checking if bool is needed
+
         Gson gson = new Gson();
-        // if easy mode,
+
+        // create easy mode model and send it back
         BattleshipModel bm = new BattleshipModel();
         return gson.toJson(bm);
-        // else,
-        //HardBattleshipModel hbm = new HardBattleshipModel();
-        //return gson.toJson(hbm);
+
     }
 
 
@@ -114,13 +121,15 @@ public class Main {
 
         System.out.println("not ez");
 
+        //set bool to false
+        //checking if bool is needed
+
         Gson gson = new Gson();
-        // if easy mode,
-        //BattleshipModel bm = new BattleshipModel();
-        //return gson.toJson(bm);
-        // else,
+
+        // create hard mode model and send it back
         HardBattleshipModel hbm = new HardBattleshipModel();
         return gson.toJson(hbm);
+
     }
 
 

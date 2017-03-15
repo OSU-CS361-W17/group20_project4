@@ -122,7 +122,11 @@ function switchToEasyMode () {
 
     //If it's good, display the game state
     request.done(function( currModel ) {
-        console.log("Staples");
+        console.log("switched successfully to easy mode");
+        console.log(currModel);
+        //Clear the enemy's board
+        displayGameState(currModel);
+        gameModel = currModel;
     });
 
     //If it's not, error
@@ -146,7 +150,20 @@ function switchToHardMode () {
 
     //If it's good, display the game state
     request.done(function( currModel ) {
-        console.log("No button");
+        console.log("switched successfully to hard mode");
+        console.log(currModel);
+
+        //clear the enemy's board
+        for (var i = 1; i <= 10; i++) {
+           for (var j = 1; j <= 10; j++) {
+               $( '#TheirBoard #' + i + '_' + j ).css("background-image", "url('http://imgur.com/a/D5WtN')");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-size", "contain");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-repeat", "no-repeat");
+            }
+        }
+
+        displayGameState(currModel);
+        gameModel = currModel;
     });
 
     //If it's not, error
