@@ -109,7 +109,7 @@ function chosenScanFunc (reqURL) {
 
 function switchToEasyMode () {
 
-    console.log("gg ez");
+    //console.log("gg ez");
 
     //Send the request
     var request = $.ajax({
@@ -122,8 +122,8 @@ function switchToEasyMode () {
 
     //If it's good, display the game state
     request.done(function( currModel ) {
-        console.log("switched successfully to easy mode");
-        console.log(currModel);
+        //console.log("switched successfully to easy mode");
+        //console.log(currModel);
         //Clear the enemy's board
         displayGameState(currModel);
         gameModel = currModel;
@@ -150,8 +150,8 @@ function switchToHardMode () {
 
     //If it's good, display the game state
     request.done(function( currModel ) {
-        console.log("switched successfully to hard mode");
-        console.log(currModel);
+        //console.log("switched successfully to hard mode");
+        //console.log(currModel);
 
         //clear the enemy's board
         for (var i = 1; i <= 10; i++) {

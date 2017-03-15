@@ -10,9 +10,6 @@ import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
 public class Main {
-    // TODO: identify mode
-    // add easy/hard bool here?...
-    //boolean isEasy = true;      //Defaults to true - so easy mode is the default
 
     public static void main(String[] args) {
         staticFiles.location("/public");
@@ -21,7 +18,7 @@ public class Main {
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
 
-        // add post path "/mode/:mode", (req, res) -> getMode(req) here?...
+        // add post path "/mode/:mode", (req, res) -> getMode(req) here
         post("/easyMode", (req, res) -> changeToEasyMode());
         post("/hardMode", (req, res) -> changeToHardMode());
 
@@ -41,10 +38,6 @@ public class Main {
         BattleshipModel bm = new BattleshipModel();
         return gson.toJson(bm);
 
-
-        // else,
-        //HardBattleshipModel hbm = new HardBattleshipModel();
-        //return gson.toJson(hbm);
     }
 
     //This function accepts an HTTP request and deseralizes it into an actual Java object.
@@ -56,10 +49,8 @@ public class Main {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        // if easy,
+        // defaults to easy
         BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
-        // else hard,
-        //BattleshipModel modelFromReq = gson.fromJson(result, HardBattleshipModel.class);
         return modelFromReq;
     }
 
@@ -103,11 +94,7 @@ public class Main {
 
     private static String changeToEasyMode() {
 
-        System.out.println("2ez");
-
-        //set global tracker of game mode to true
-        //checking if bool is needed
-
+        //System.out.println("2ez");
         Gson gson = new Gson();
 
         // create easy mode model and send it back
@@ -119,11 +106,7 @@ public class Main {
 
     private static String changeToHardMode() {
 
-        System.out.println("not ez");
-
-        //set bool to false
-        //checking if bool is needed
-
+        //System.out.println("not ez");
         Gson gson = new Gson();
 
         // create hard mode model and send it back
