@@ -33,8 +33,8 @@ public class Main {
     private static String newModel() {
         Gson gson = new Gson();
         // if easy mode,
-        // BattleshipModel bm = new BattleshipModel();
-        // return gson.toJson(bm);
+        //BattleshipModel bm = new BattleshipModel();
+        //return gson.toJson(bm);
         // else,
         HardBattleshipModel hbm = new HardBattleshipModel();
         return gson.toJson(hbm);

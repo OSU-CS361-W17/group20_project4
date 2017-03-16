@@ -55,17 +55,21 @@ public class HardBattleshipModel extends BattleshipModel {
 
         //if the AI hit a ship continue hitting it
         if (randToggle == false) {
-            /*
-            if (horizontal == false && numHit == 1){
-                nextHit.setAcross(nextHit.getAcross() - 1);
+
+            if (horizontal == false){
+                if (nextHit.equals(firstHit)){
+                    nextHit.setAcross(nextHit.getAcross() + 1);
+                }
             }
 
-            if (horizontal == true && numHit == 1){
-                nextHit.setDown(nextHit.getDown() - 1);
+            if (horizontal == true) {
+                if (nextHit.equals(firstHit)) {
+                    nextHit.setDown(nextHit.getDown() + 1);
+                }
             }
-            */
 
-            playerShot(nextHit);
+            Coordinate coor = new Coordinate(nextHit.getAcross(), nextHit.getDown());
+            playerShot(coor);
             numHit++;
 
 
@@ -77,16 +81,10 @@ public class HardBattleshipModel extends BattleshipModel {
 
             if (horizontal == false){
                 nextHit.setAcross(nextHit.getAcross() + 1);
-                if (nextHit.equals(firstHit)){
-                    nextHit.setAcross(nextHit.getAcross() + 1);
-                }
             }
 
             if (horizontal == true){
                 nextHit.setDown(nextHit.getDown() + 1);
-                if (nextHit.equals(firstHit)){
-                    nextHit.setDown(nextHit.getDown() + 1);
-                }
             }
 
             return;
