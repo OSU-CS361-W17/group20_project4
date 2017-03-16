@@ -10,8 +10,6 @@ import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
 public class Main {
-    // TODO: identify mode
-    // add easy/hard bool here?...
 
     public static void main(String[] args) {
         staticFiles.location("/public");
@@ -20,7 +18,9 @@ public class Main {
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
 
-        // add post path "/mode/:mode", (req, res) -> getMode(req) here?...
+        // add post path "/mode/:mode", (req, res) -> getMode(req) here
+        post("/easyMode", (req, res) -> changeToEasyMode());
+        post("/hardMode", (req, res) -> changeToHardMode());
 
         post("/fire/:row/:col", (req, res) -> fireAt(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to scan
@@ -32,12 +32,12 @@ public class Main {
     //This function returns a new model
     private static String newModel() {
         Gson gson = new Gson();
+
+        //The game should default to easy mode
         // if easy mode,
-        // BattleshipModel bm = new BattleshipModel();
-        // return gson.toJson(bm);
-        // else,
-        HardBattleshipModel hbm = new HardBattleshipModel();
-        return gson.toJson(hbm);
+        BattleshipModel bm = new BattleshipModel();
+        return gson.toJson(bm);
+
     }
 
     //This function accepts an HTTP request and deseralizes it into an actual Java object.
@@ -49,10 +49,8 @@ public class Main {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        // if easy,
-        //BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
-        // else hard,
-        BattleshipModel modelFromReq = gson.fromJson(result, HardBattleshipModel.class);
+        // defaults to easy
+        BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
         return modelFromReq;
     }
 
@@ -93,4 +91,29 @@ public class Main {
         Gson gson = new Gson();
         return gson.toJson(currModel);
     }
+
+    private static String changeToEasyMode() {
+
+        //System.out.println("2ez");
+        Gson gson = new Gson();
+
+        // create easy mode model and send it back
+        BattleshipModel bm = new BattleshipModel();
+        return gson.toJson(bm);
+
+    }
+
+
+    private static String changeToHardMode() {
+
+        //System.out.println("not ez");
+        Gson gson = new Gson();
+
+        // create hard mode model and send it back
+        HardBattleshipModel hbm = new HardBattleshipModel();
+        return gson.toJson(hbm);
+
+    }
+
+
 }
