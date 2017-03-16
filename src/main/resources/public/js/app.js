@@ -124,7 +124,16 @@ function switchToEasyMode () {
     request.done(function( currModel ) {
         //console.log("switched successfully to easy mode");
         //console.log(currModel);
+
         //Clear the enemy's board
+        for (var i = 1; i <= 10; i++) {
+           for (var j = 1; j <= 10; j++) {
+               $( '#TheirBoard #' + i + '_' + j ).css("background-image", "url('http://imgur.com/a/D5WtN')");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-size", "contain");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-repeat", "no-repeat");
+            }
+        }
+
         displayGameState(currModel);
         gameModel = currModel;
     });
