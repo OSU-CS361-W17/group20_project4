@@ -15,18 +15,18 @@ import java.util.Random;
     private Military submarine = new Military(true,"Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
     // computer ships are formally initialized (hardcoded) in the default constructor.
-    protected Civilian computer_clipper;
-    protected Civilian computer_dinghy;
-    protected Military computer_aircraftCarrier;
-    protected Military computer_battleship;
-    protected Military computer_submarine;
+    protected Civilian computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
+    protected Civilian computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
+    protected Military computer_aircraftCarrier = new Military(false,"Computer_AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
+    protected Military computer_battleship = new Military(true,"Computer_Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
+    protected Military computer_submarine = new Military(true,"Computer_Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
-    ArrayList<Coordinate> playerHits;
-    private ArrayList<Coordinate> playerMisses;
-    ArrayList<Coordinate> computerHits;
-    private ArrayList<Coordinate> computerMisses;
+    ArrayList<Coordinate> playerHits = new ArrayList<>();
+    private ArrayList<Coordinate> playerMisses = new ArrayList<>();
+    ArrayList<Coordinate> computerHits = new ArrayList<>();
+    private ArrayList<Coordinate> computerMisses = new ArrayList<>();
 
-    ArrayList<Coordinate> shipSquares;      // to hold all the squares of all ships already placed by the user
+    ArrayList<Coordinate> shipSquares = new ArrayList<>();      // to hold all the squares of all ships already placed by the user
 
     boolean scanResult = false;
     boolean overlapResult = false;
@@ -37,18 +37,12 @@ import java.util.Random;
 
 
     public BattleshipModel() {
-        computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
-        computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(10, 10), new Coordinate(10, 10));
-        computer_aircraftCarrier = new Military(false,"Computer_AircraftCarrier",5, new Coordinate(2,2),new Coordinate(2,6));
-        computer_battleship = new Military(true,"Computer_Battleship",4, new Coordinate(2,8),new Coordinate(5,8));
-        computer_submarine = new Military(true,"Computer_Submarine",2, new Coordinate(9,6),new Coordinate(9,7));
-
-        playerHits = new ArrayList<>();
-        playerMisses= new ArrayList<>();
-        computerHits = new ArrayList<>();
-        computerMisses= new ArrayList<>();
-
-        shipSquares = new ArrayList<>();
+        // System.out.println("This is the parent BattleshipModel default constructor.");
+        computer_clipper.setLocation(new Coordinate(5, 1), new Coordinate(5, 3));
+        computer_dinghy.setLocation(new Coordinate(10, 10), new Coordinate(10, 10));
+        computer_aircraftCarrier.setLocation(new Coordinate(2, 2), new Coordinate(2, 6));
+        computer_battleship.setLocation(new Coordinate(2, 8), new Coordinate(5, 8));
+        computer_submarine.setLocation(new Coordinate(9, 6), new Coordinate(9, 7));
     }
 
 
