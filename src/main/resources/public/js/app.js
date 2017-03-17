@@ -107,6 +107,80 @@ function chosenScanFunc (reqURL) {
     });
 }
 
+function switchToEasyMode () {
+
+    //console.log("gg ez");
+
+    //Send the request
+    var request = $.ajax({
+        url: "/easyMode",
+        method: "post",
+        data: JSON.stringify(gameModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    //If it's good, display the game state
+    request.done(function( currModel ) {
+        //console.log("switched successfully to easy mode");
+        //console.log(currModel);
+
+        //Clear the enemy's board
+        for (var i = 1; i <= 10; i++) {
+           for (var j = 1; j <= 10; j++) {
+               $( '#TheirBoard #' + i + '_' + j ).css("background-image", "url('http://imgur.com/a/D5WtN')");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-size", "contain");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-repeat", "no-repeat");
+            }
+        }
+
+        displayGameState(currModel);
+        gameModel = currModel;
+    });
+
+    //If it's not, error
+    request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+
+}
+
+function switchToHardMode () {
+
+    console.log("gg no re");
+
+    var request = $.ajax({
+        url: "/hardMode",
+        method: "post",
+        data: JSON.stringify(gameModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    //If it's good, display the game state
+    request.done(function( currModel ) {
+        //console.log("switched successfully to hard mode");
+        //console.log(currModel);
+
+        //clear the enemy's board
+        for (var i = 1; i <= 10; i++) {
+           for (var j = 1; j <= 10; j++) {
+               $( '#TheirBoard #' + i + '_' + j ).css("background-image", "url('http://imgur.com/a/D5WtN')");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-size", "contain");
+               $( '#TheirBoard #' + i + '_' + j ).css("background-repeat", "no-repeat");
+            }
+        }
+
+        displayGameState(currModel);
+        gameModel = currModel;
+    });
+
+    //If it's not, error
+    request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+
+}
 
 function log(logContents){
     console.log(logContents);

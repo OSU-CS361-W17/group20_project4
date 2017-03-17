@@ -1,5 +1,6 @@
 package edu.oregonstate.cs361.battleship;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,16 +19,84 @@ public class HardBattleshipModel extends BattleshipModel {
     boolean horizontal = false;
 
     public HardBattleshipModel() {
-        super();    // first initialize stuff using parent default constructor...
-        // TODO: formally initialize computer ships (randomized starts and ends)
-        // The following is for testing inheritance:
-        computer_aircraftCarrier = new Military(false, "Computer_AircraftCarrier", 5, new Coordinate(3, 3), new Coordinate(3, 7));
+
+        // System.out.println("This is the child HardBattleshipModel default constructor.\n");
+
+        boolean placed = false;
+        Random random = new Random();
+        int rand1, rand2, orient;
+        ArrayList<Coordinate> occupied = new ArrayList<>();     // track coors occupied by already-placed ships
+
+        ArrayList<Ship> comp_ships = new ArrayList<>(5);
+        comp_ships.add(computer_aircraftCarrier);
+        comp_ships.add(computer_battleship);
+        comp_ships.add(computer_clipper);
+        comp_ships.add(computer_submarine);
+        comp_ships.add(computer_dinghy);
+
+        /* System.out.println("Ship locations prior to printing: ");
+        for (Ship ship: comp_ships) {
+            System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
+        }
+        System.out.println();
+
+        System.out.println("Ship locations after resetting back to 0: ");
+        for (Ship ship: comp_ships) {
+            ship.setLocation(new Coordinate(0,0), new Coordinate(0,0));
+            System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
+        }
+        System.out.println(); */
+
+        // place each ship.
+        for (Ship ship : comp_ships) {
+            while (placed == false) {                           // while given ship not already successfully placed,
+                // generate a random across or down for the ship's starting coor. For example: aircraft carrier has
+                // length 5. Therefore it should be able to start at 1, 2, 3, 4, 5, or 6. nextInt's bound would be 0
+                // (inclusive) through 10 - 5 + 1 = 6 (exclusive, so the actual max number would be 5). Add 1 again to
+                // the whole thing, and rand1's possibilities become 1, 2, ..., 6.
+                rand1 = random.nextInt(10 - ship.length + 1) + 1;
+                // the other across/down just needs to be between 1 and 10, inclusive. We add 1 so that 0, 1, ..., 9
+                // becomes 1, 2, ..., 10.
+                rand2 = random.nextInt(10) + 1;
+
+                orient = random.nextInt(2);             // randomize orientation: 0 for horiz, 1 for vert
+
+                if (orient == 0) {                            // if horiz, row anywhere, col restricted by length
+                    ship.setLocation(new Coordinate(rand2, rand1), new Coordinate(rand2, rand1 + ship.length - 1));
+                }
+                else if (orient == 1) {                       // if vert, row restricted by length, col anywhere
+                    ship.setLocation(new Coordinate(rand1, rand2), new Coordinate(rand1 + ship.length - 1, rand2));
+                }
+
+                // check for overlap with other ships: for each coordinate occupied by our freshly placed ship,
+                for (Coordinate coor : ship.getShipSquares()) {
+                    if (occupied.contains(coor)) {            // if the coor is already occupied, cancel placement...
+                        ship.setLocation(new Coordinate(0, 0), new Coordinate(0, 0));
+                        placed = false;
+                        break;
+                    }
+                    else {
+                        placed = true;
+                    }
+                }
+                if (placed) {
+                    occupied.addAll(ship.getShipSquares());
+                    placed = false;
+                    break;                                    // this ship is good. Break out to advance to next ship
+                }
+            }
+        }
+
+        /* System.out.println("Ship locations after random placement: ");
+        for (Ship ship: comp_ships) {
+            System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
+        }
+        System.out.println(); */
+
     }
 
     @Override
     public void shootAtPlayer() {
-
-        // TODO: smart shooting. Pew pew
 
         //if the AI has not hit a ship fire randomly until it has
         if (randToggle == true) {
