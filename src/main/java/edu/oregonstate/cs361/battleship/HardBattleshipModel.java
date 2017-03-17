@@ -12,7 +12,7 @@ public class HardBattleshipModel extends BattleshipModel {
     // warning: if extra variables introduced here, json/gson conversion may require extra magic in Main.java.
 
     public HardBattleshipModel() {
-        System.out.println("This is the child HardBattleshipModel default constructor.\n");
+        // System.out.println("This is the child HardBattleshipModel default constructor.\n");
 
         boolean placed = false;
         Random random = new Random();
@@ -26,7 +26,7 @@ public class HardBattleshipModel extends BattleshipModel {
         comp_ships.add(computer_submarine);
         comp_ships.add(computer_dinghy);
 
-        System.out.println("Ship locations prior to printing: ");
+        /* System.out.println("Ship locations prior to printing: ");
         for (Ship ship: comp_ships) {
             System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
         }
@@ -37,7 +37,7 @@ public class HardBattleshipModel extends BattleshipModel {
             ship.setLocation(new Coordinate(0,0), new Coordinate(0,0));
             System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
         }
-        System.out.println();
+        System.out.println(); */
 
         // place each ship.
         for (Ship ship : comp_ships) {
@@ -79,11 +79,11 @@ public class HardBattleshipModel extends BattleshipModel {
             }
         }
 
-        System.out.println("Ship locations after random placement: ");
+        /* System.out.println("Ship locations after random placement: ");
         for (Ship ship: comp_ships) {
             System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
         }
-        System.out.println();
+        System.out.println(); */
     }
 
     @Override

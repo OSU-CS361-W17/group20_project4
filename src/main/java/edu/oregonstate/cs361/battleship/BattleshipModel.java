@@ -37,7 +37,7 @@ import java.util.Random;
 
 
     public BattleshipModel() {
-        System.out.println("This is the parent BattleshipModel default constructor.");
+        // System.out.println("This is the parent BattleshipModel default constructor.");
         computer_clipper.setLocation(new Coordinate(5, 1), new Coordinate(5, 3));
         computer_dinghy.setLocation(new Coordinate(10, 10), new Coordinate(10, 10));
         computer_aircraftCarrier.setLocation(new Coordinate(2, 2), new Coordinate(2, 6));
