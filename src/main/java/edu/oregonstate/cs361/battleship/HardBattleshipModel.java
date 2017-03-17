@@ -87,7 +87,7 @@ public class HardBattleshipModel extends BattleshipModel {
             }
         }
 
-        /* System.out.println("Ship locations after random placement: ");
+        /*System.out.println("Ship locations after random placement: ");
         for (Ship ship: comp_ships) {
             System.out.println(ship.getName() + ": starts " + ship.start.getAcross() + ", " + ship.start.getDown() + "; ends " + ship.end.getAcross() + ", " + ship.end.getDown());
         }
