@@ -11,6 +11,8 @@ import static spark.Spark.staticFiles;
 
 public class Main {
 
+    public static int hardFlag = 0;
+
     public static void main(String[] args) {
         staticFiles.location("/public");
 
@@ -49,9 +51,18 @@ public class Main {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        // defaults to easy
-        BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
-        return modelFromReq;
+        // if easy
+        if (hardFlag == 0) {
+            BattleshipModel modelFromReq = gson.fromJson(result, BattleshipModel.class);
+            return modelFromReq;
+        }
+
+        // else hard
+        else {
+            HardBattleshipModel modelFromReq = gson.fromJson(result, HardBattleshipModel.class);
+            return modelFromReq;
+        }
+
     }
 
     //This controller
@@ -96,6 +107,7 @@ public class Main {
 
         //System.out.println("2ez");
         Gson gson = new Gson();
+        hardFlag = 0;
 
         // create easy mode model and send it back
         BattleshipModel bm = new BattleshipModel();
@@ -108,6 +120,7 @@ public class Main {
 
         //System.out.println("not ez");
         Gson gson = new Gson();
+        hardFlag = 1;
 
         // create hard mode model and send it back
         HardBattleshipModel hbm = new HardBattleshipModel();
