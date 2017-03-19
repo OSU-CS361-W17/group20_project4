@@ -13,9 +13,9 @@ public class HardBattleshipModel extends BattleshipModel {
 
     boolean randToggle = true;
     int numHit = 0;
-    int length;
-    Coordinate nextHit = new Coordinate(0,0);
-    Coordinate firstHit = new Coordinate(0,0);
+    int length = 0;
+    Coordinate nextHit = new Coordinate(0, 0);
+    Coordinate firstHit = new Coordinate(0, 0);
     boolean horizontal = false;
 
     public HardBattleshipModel() {
@@ -63,8 +63,7 @@ public class HardBattleshipModel extends BattleshipModel {
 
                 if (orient == 0) {                            // if horiz, row anywhere, col restricted by length
                     ship.setLocation(new Coordinate(rand2, rand1), new Coordinate(rand2, rand1 + ship.length - 1));
-                }
-                else if (orient == 1) {                       // if vert, row restricted by length, col anywhere
+                } else if (orient == 1) {                       // if vert, row restricted by length, col anywhere
                     ship.setLocation(new Coordinate(rand1, rand2), new Coordinate(rand1 + ship.length - 1, rand2));
                 }
 
@@ -74,8 +73,7 @@ public class HardBattleshipModel extends BattleshipModel {
                         ship.setLocation(new Coordinate(0, 0), new Coordinate(0, 0));
                         placed = false;
                         break;
-                    }
-                    else {
+                    } else {
                         placed = true;
                     }
                 }
@@ -111,69 +109,62 @@ public class HardBattleshipModel extends BattleshipModel {
 
             //if one of the following ships was hit begin hitting the rest of the ship
             if (aircraftCarrier.covers(coor)) {
-                setShipInfo(getShip("aircraftcarrier"), coor);
+                setShipInfo(getShip("aircraftCarrier"), coor);
             }
             if (battleship.covers(coor)) {
                 setShipInfo(getShip("battleship"), coor);
             }
             if (submarine.covers(coor)) {
-                setShipInfo(getShip("submarine"), coor);
+                setShipInfo(getShip("battleship"), coor);
             }
             return;
         }
 
         //if the AI hit a ship continue hitting it
-        if (randToggle == false) {
+        if (randToggle == false)
 
-            if (horizontal == false){
-                if (nextHit.equals(firstHit)){
+
+            if (horizontal == false) {
+                if (nextHit.equals(firstHit)) {
                     nextHit.setAcross(nextHit.getAcross() + 1);
                 }
             }
 
-            if (horizontal == true) {
-                if (nextHit.equals(firstHit)) {
-                    nextHit.setDown(nextHit.getDown() + 1);
-                }
-            }
-
-            Coordinate coor = new Coordinate(nextHit.getAcross(), nextHit.getDown());
-            playerShot(coor);
-            numHit++;
-
-
-            //if the AI has hit all the places on the ship reset the ship information so it will randomly fire again
-            if (numHit == length){
-                resetShipInfo();
-                return;
-            }
-
-            if (horizontal == false){
-                nextHit.setAcross(nextHit.getAcross() + 1);
-            }
-
-            if (horizontal == true){
+        if (horizontal == true) {
+            if (nextHit.equals(firstHit)) {
                 nextHit.setDown(nextHit.getDown() + 1);
             }
+        }
 
+        Coordinate coor = new Coordinate(nextHit.getAcross(), nextHit.getDown());
+        playerShot(coor);
+        numHit++;
+
+
+        //if the AI has hit all the places on the ship reset the ship information so it will randomly fire again
+        if (numHit == length) {
+            randToggle = true;
+            numHit = 0;
             return;
         }
+
+        if (horizontal == false) {
+            nextHit.setAcross(nextHit.getAcross() + 1);
+        }
+
+        if (horizontal == true) {
+            nextHit.setDown(nextHit.getDown() + 1);
+        }
+
+        return;
     }
 
     void setShipInfo(Ship currentShip, Coordinate coor) {
         length = currentShip.length;
         nextHit = currentShip.start;
-        System.out.println(nextHit.getAcross());
-        System.out.println(nextHit.getDown());
-        firstHit = coor;
         horizontal = currentShip.isHorizontal();
+        firstHit = coor;
         randToggle = false;
         numHit = 1;
-    }
-
-    void resetShipInfo(){
-        length = 0;
-        randToggle = true;
-        numHit = 0;
     }
 }
