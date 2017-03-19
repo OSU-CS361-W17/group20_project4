@@ -123,12 +123,12 @@ public class HardBattleshipModel extends BattleshipModel {
         //if the AI hit a ship continue hitting it
         if (randToggle == false)
 
-
             if (horizontal == false) {
                 if (nextHit.equals(firstHit)) {
                     nextHit.setAcross(nextHit.getAcross() + 1);
                 }
             }
+
 
         if (horizontal == true) {
             if (nextHit.equals(firstHit)) {
