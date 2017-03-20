@@ -8,11 +8,11 @@ import java.util.Random;
  */
  public class BattleshipModel {
 
-    private Civilian clipper = new Civilian("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
-    private Civilian dinghy = new Civilian("Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
-	private Military aircraftCarrier = new Military(false,"AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
-    private Military battleship = new Military(true,"Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
-    private Military submarine = new Military(true,"Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
+    protected Civilian clipper = new Civilian("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
+    protected Civilian dinghy = new Civilian("Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
+	protected Military aircraftCarrier = new Military(false,"AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
+    protected Military battleship = new Military(true,"Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
+    protected Military submarine = new Military(true,"Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
     // computer ships are formally initialized (hardcoded) in the default constructor.
     protected Civilian computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
@@ -22,9 +22,9 @@ import java.util.Random;
     protected Military computer_submarine = new Military(true,"Computer_Submarine",2, new Coordinate(0,0),new Coordinate(0,0));
 
     ArrayList<Coordinate> playerHits = new ArrayList<>();
-    private ArrayList<Coordinate> playerMisses = new ArrayList<>();
+    protected ArrayList<Coordinate> playerMisses = new ArrayList<>();
     ArrayList<Coordinate> computerHits = new ArrayList<>();
-    private ArrayList<Coordinate> computerMisses = new ArrayList<>();
+    protected ArrayList<Coordinate> computerMisses = new ArrayList<>();
 
     ArrayList<Coordinate> shipSquares = new ArrayList<>();      // to hold all the squares of all ships already placed by the user
 
@@ -171,18 +171,18 @@ import java.util.Random;
             System.out.println("Dupe");
         }
 
-        if(aircraftCarrier.covers(coor)){
-            playerHits.add(coor);
-        }else if (battleship.covers(coor)){
-            playerHits.add(coor);
-        }else if (submarine.covers(coor)){
-            playerHits.add(coor);
-        }else if (clipper.covers(coor)){
-            playerHits.addAll(clipper.one_hit());
-        }else if (dinghy.covers(coor)){
-            playerHits.addAll(dinghy.one_hit());
+        if(this.aircraftCarrier.covers(coor)){
+            this.playerHits.add(coor);
+        }else if (this.battleship.covers(coor)){
+            this.playerHits.add(coor);
+        }else if (this.submarine.covers(coor)){
+            this.playerHits.add(coor);
+        }else if (this.clipper.covers(coor)){
+            this.playerHits.addAll(this.clipper.one_hit());
+        }else if (this.dinghy.covers(coor)){
+            this.playerHits.addAll(this.dinghy.one_hit());
         } else {
-            playerMisses.add(coor);
+            this.playerMisses.add(coor);
         }
     }
 
